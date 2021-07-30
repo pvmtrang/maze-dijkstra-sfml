@@ -4,15 +4,21 @@
 CMakeFiles/maze-sfml.dir/src/Dijkstra.cpp.obj
  ../headers/Dijkstra.hpp
  ../headers/Graph.hpp
+ ../headers/Node.hpp
  F:/edoc/c--/maze-sfml/src/Dijkstra.cpp
 CMakeFiles/maze-sfml.dir/src/Graph.cpp.obj
  ../headers/Graph.hpp
+ ../headers/Node.hpp
  F:/edoc/c--/maze-sfml/src/Graph.cpp
+CMakeFiles/maze-sfml.dir/src/Node.cpp.obj
+ ../headers/Node.hpp
+ F:/edoc/c--/maze-sfml/src/Node.cpp
 CMakeFiles/maze-sfml.dir/src/Union.cpp.obj
+ ../headers/Union.hpp
  F:/edoc/c--/maze-sfml/src/Union.cpp
- F:/edoc/c--/maze-sfml/src/Union.hpp
 CMakeFiles/maze-sfml.dir/src/main.cpp.obj
  ../headers/Dijkstra.hpp
  ../headers/Graph.hpp
- F:/edoc/c--/maze-sfml/src/Union.hpp
+ ../headers/Node.hpp
+ ../headers/Union.hpp
  F:/edoc/c--/maze-sfml/src/main.cpp

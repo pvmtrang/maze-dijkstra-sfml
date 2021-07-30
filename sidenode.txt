@@ -1,0 +1,9 @@
+- C++ has
+    + std::list ~ doubly linked list. Keep track of size.
+    + std::forward_list ~ singly linked list. Doesnt keep track of size.
+    Rumor has the forward_list contains NO space or time overhead compared to a user defined singly linked list
+- list ~ linkedlist: element storage not contiguous. Insert, delete faster -> add new pointer
+  vector ~ array: elements in contiguous memory. Insert, delete -> shift elements by one
+- emplace_back() vs push_back() ???
+    + emplace doesnt create a temporary (unnecessary) copies while push does
+    + more ???

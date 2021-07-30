@@ -2,6 +2,7 @@
 // Created by tieu on 7/29/2021.
 //
 
+#include <iostream>
 #include "Union.hpp"
 
 Union::Union(int numberOfNode) : numberOfNode(numberOfNode) {
@@ -40,6 +41,39 @@ int Union::findRoot(int node) {
     return node;
 }
 
+//checked
 bool Union::isConnected(int node1, int node2) {
     return findRoot(node1) == findRoot(node2);
+}
+
+//checked
+void Union::printComponent() {
+    int currentNode = 0;
+    std::vector<std::vector<int>> output;
+    while (currentNode < numberOfNode) {
+        int isIncluded = false;
+        for (int i = 0; i < output.size(); i++) {
+            //if the currentNode belong to any component -> add
+            if (isConnected(currentNode, output[i][0])) {
+                output[i].push_back(currentNode);
+                isIncluded = true;
+                break;
+            }
+        }
+        //else create a new component and add
+        if (!isIncluded) {
+            output.push_back(std::vector<int>());
+            output[output.size() - 1].push_back(currentNode);
+        }
+        currentNode++;
+    }
+
+    for (int i = 0; i < output.size(); i++) {
+        std::cout << i + 1 << ": ";
+        for (int j = 0; j <output[i].size(); j++) {
+            std::cout << "-" << output[i][j];
+        }
+        std::cout << std::endl;
+    }
+
 }

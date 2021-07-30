@@ -3,7 +3,7 @@ project(maze-sfml)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(maze-sfml src/main.cpp src/Graph.cpp headers/Graph.hpp src/Dijkstra.cpp headers/Dijkstra.hpp src/Union.cpp src/Union.hpp)
+add_executable(maze-sfml src/main.cpp src/Graph.cpp headers/Graph.hpp src/Dijkstra.cpp headers/Dijkstra.hpp src/Union.cpp headers/Union.hpp src/Node.cpp headers/Node.hpp)
 
 include_directories(headers /usr/include c:/SFML/include)
 

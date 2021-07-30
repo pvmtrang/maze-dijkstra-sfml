@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/maze-sfml.dir/src/Dijkstra.cpp.obj"
   "CMakeFiles/maze-sfml.dir/src/Graph.cpp.obj"
+  "CMakeFiles/maze-sfml.dir/src/Node.cpp.obj"
   "CMakeFiles/maze-sfml.dir/src/Union.cpp.obj"
   "CMakeFiles/maze-sfml.dir/src/main.cpp.obj"
   "libmaze-sfml.dll.a"

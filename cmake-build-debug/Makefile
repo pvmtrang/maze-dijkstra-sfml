@@ -195,6 +195,33 @@ src/Graph.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\maze-sfml.dir\build.make CMakeFiles/maze-sfml.dir/src/Graph.cpp.s
 .PHONY : src/Graph.cpp.s
 
+src/Node.obj: src/Node.cpp.obj
+
+.PHONY : src/Node.obj
+
+# target to build an object file
+src/Node.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\maze-sfml.dir\build.make CMakeFiles/maze-sfml.dir/src/Node.cpp.obj
+.PHONY : src/Node.cpp.obj
+
+src/Node.i: src/Node.cpp.i
+
+.PHONY : src/Node.i
+
+# target to preprocess a source file
+src/Node.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\maze-sfml.dir\build.make CMakeFiles/maze-sfml.dir/src/Node.cpp.i
+.PHONY : src/Node.cpp.i
+
+src/Node.s: src/Node.cpp.s
+
+.PHONY : src/Node.s
+
+# target to generate assembly for a file
+src/Node.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\maze-sfml.dir\build.make CMakeFiles/maze-sfml.dir/src/Node.cpp.s
+.PHONY : src/Node.cpp.s
+
 src/Union.obj: src/Union.cpp.obj
 
 .PHONY : src/Union.obj
@@ -264,6 +291,9 @@ help:
 	@echo ... src/Graph.obj
 	@echo ... src/Graph.i
 	@echo ... src/Graph.s
+	@echo ... src/Node.obj
+	@echo ... src/Node.i
+	@echo ... src/Node.s
 	@echo ... src/Union.obj
 	@echo ... src/Union.i
 	@echo ... src/Union.s

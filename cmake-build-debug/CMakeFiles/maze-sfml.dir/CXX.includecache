@@ -13,8 +13,14 @@ Graph.hpp
 ../headers/Graph.hpp
 vector
 -
+forward_list
+-
+Node.hpp
+../headers/Node.hpp
 
-F:/edoc/c--/maze-sfml/src/Union.hpp
+../headers/Node.hpp
+
+../headers/Union.hpp
 vector
 -
 
@@ -27,4 +33,6 @@ Dijkstra.hpp
 -
 Union.hpp
 F:/edoc/c--/maze-sfml/src/Union.hpp
+Node.hpp
+F:/edoc/c--/maze-sfml/src/Node.hpp
 

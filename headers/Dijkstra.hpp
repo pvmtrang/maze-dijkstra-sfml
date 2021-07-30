@@ -8,6 +8,10 @@
 
 #include "Graph.hpp"
 
+/**
+ * vector open, distance, closed, previous store status of node
+ * node is equal to index
+ */
 class Dijkstra {
 private:
     static const int INFINITY = INT_MAX;

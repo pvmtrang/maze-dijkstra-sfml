@@ -92,12 +92,12 @@ clean: CMakeFiles/maze-sfml.dir/clean
 CMakeFiles/maze-sfml.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\maze-sfml.dir\build.make CMakeFiles/maze-sfml.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\maze-sfml.dir\build.make CMakeFiles/maze-sfml.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=F:\edoc\c--\maze-sfml\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5 "Built target maze-sfml"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=F:\edoc\c--\maze-sfml\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6 "Built target maze-sfml"
 .PHONY : CMakeFiles/maze-sfml.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/maze-sfml.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start F:\edoc\c--\maze-sfml\cmake-build-debug\CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start F:\edoc\c--\maze-sfml\cmake-build-debug\CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/maze-sfml.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start F:\edoc\c--\maze-sfml\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/maze-sfml.dir/rule

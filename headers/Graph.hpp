@@ -7,25 +7,37 @@
 
 
 #include <vector>
+#include <forward_list>
+#include "Node.hpp"
 
+/**
+ ** Maintaining graph by a adjacency list.
+ * implemented by a vector of linked list
+ * Adjacency list:
+ * [0]: Node(0) -> neighbor -> nodes -> in -> reverse -> inserted -> order
+ * [1]: Node(1) -> neighbor -> nodes -> in -> reverse -> inserted -> order
+ * [2]: Node(2) -> neighbor -> nodes -> in -> reverse -> inserted -> order
+ */
 class Graph {
 private:
 //    adjacency matrix
-    std::vector<std::vector<int>> weightedGraph;
+//    std::vector<std::vector<int>> graph;
+//    adjacency list
+    std::vector<std::forward_list<Node>> graph;
+    
     int numberOfNode;
 
 public:
-    static const int UNDEFINED = -1; //This is just the declaration, the def is in cpp
-
+    //van se maintain numberOfNode by size of the screen
     Graph(int numberOfNode);
 
     virtual ~Graph();
 
     void printGraph();
 
-    void addEdge(int node1, int node2, int weight);
+    void addEdge(int node1, int node2);
 
-    int getWeight(int node1, int node2);
+    int getDistance(int node1, int node2);
 
     int getNumberOfNode() const;
 
