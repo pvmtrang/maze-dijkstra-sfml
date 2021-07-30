@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../headers/Dijkstra.hpp
+Graph.hpp
+../headers/Graph.hpp
+
+../headers/Graph.hpp
+vector
+-
+
+F:/edoc/c--/maze-sfml/src/Union.hpp
+vector
+-
+
+F:/edoc/c--/maze-sfml/src/main.cpp
+iostream
+-
+Graph.hpp
+-
+Dijkstra.hpp
+-
+Union.hpp
+F:/edoc/c--/maze-sfml/src/Union.hpp
+
