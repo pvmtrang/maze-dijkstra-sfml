@@ -195,6 +195,33 @@ src/Graph.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\maze-sfml.dir\build.make CMakeFiles/maze-sfml.dir/src/Graph.cpp.s
 .PHONY : src/Graph.cpp.s
 
+src/Maze.obj: src/Maze.cpp.obj
+
+.PHONY : src/Maze.obj
+
+# target to build an object file
+src/Maze.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\maze-sfml.dir\build.make CMakeFiles/maze-sfml.dir/src/Maze.cpp.obj
+.PHONY : src/Maze.cpp.obj
+
+src/Maze.i: src/Maze.cpp.i
+
+.PHONY : src/Maze.i
+
+# target to preprocess a source file
+src/Maze.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\maze-sfml.dir\build.make CMakeFiles/maze-sfml.dir/src/Maze.cpp.i
+.PHONY : src/Maze.cpp.i
+
+src/Maze.s: src/Maze.cpp.s
+
+.PHONY : src/Maze.s
+
+# target to generate assembly for a file
+src/Maze.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\maze-sfml.dir\build.make CMakeFiles/maze-sfml.dir/src/Maze.cpp.s
+.PHONY : src/Maze.cpp.s
+
 src/Node.obj: src/Node.cpp.obj
 
 .PHONY : src/Node.obj
@@ -222,32 +249,32 @@ src/Node.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\maze-sfml.dir\build.make CMakeFiles/maze-sfml.dir/src/Node.cpp.s
 .PHONY : src/Node.cpp.s
 
-src/Union.obj: src/Union.cpp.obj
+src/UnionFind.obj: src/UnionFind.cpp.obj
 
-.PHONY : src/Union.obj
+.PHONY : src/UnionFind.obj
 
 # target to build an object file
-src/Union.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\maze-sfml.dir\build.make CMakeFiles/maze-sfml.dir/src/Union.cpp.obj
-.PHONY : src/Union.cpp.obj
+src/UnionFind.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\maze-sfml.dir\build.make CMakeFiles/maze-sfml.dir/src/UnionFind.cpp.obj
+.PHONY : src/UnionFind.cpp.obj
 
-src/Union.i: src/Union.cpp.i
+src/UnionFind.i: src/UnionFind.cpp.i
 
-.PHONY : src/Union.i
+.PHONY : src/UnionFind.i
 
 # target to preprocess a source file
-src/Union.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\maze-sfml.dir\build.make CMakeFiles/maze-sfml.dir/src/Union.cpp.i
-.PHONY : src/Union.cpp.i
+src/UnionFind.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\maze-sfml.dir\build.make CMakeFiles/maze-sfml.dir/src/UnionFind.cpp.i
+.PHONY : src/UnionFind.cpp.i
 
-src/Union.s: src/Union.cpp.s
+src/UnionFind.s: src/UnionFind.cpp.s
 
-.PHONY : src/Union.s
+.PHONY : src/UnionFind.s
 
 # target to generate assembly for a file
-src/Union.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\maze-sfml.dir\build.make CMakeFiles/maze-sfml.dir/src/Union.cpp.s
-.PHONY : src/Union.cpp.s
+src/UnionFind.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\maze-sfml.dir\build.make CMakeFiles/maze-sfml.dir/src/UnionFind.cpp.s
+.PHONY : src/UnionFind.cpp.s
 
 src/main.obj: src/main.cpp.obj
 
@@ -291,12 +318,15 @@ help:
 	@echo ... src/Graph.obj
 	@echo ... src/Graph.i
 	@echo ... src/Graph.s
+	@echo ... src/Maze.obj
+	@echo ... src/Maze.i
+	@echo ... src/Maze.s
 	@echo ... src/Node.obj
 	@echo ... src/Node.i
 	@echo ... src/Node.s
-	@echo ... src/Union.obj
-	@echo ... src/Union.i
-	@echo ... src/Union.s
+	@echo ... src/UnionFind.obj
+	@echo ... src/UnionFind.i
+	@echo ... src/UnionFind.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s

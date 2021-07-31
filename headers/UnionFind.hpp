@@ -7,7 +7,7 @@
 
 #include <vector>
 
-class Union {
+class UnionFind {
 private:
     int numberOfNode;
     std::vector<int> id;
@@ -16,7 +16,7 @@ private:
     int findRoot(int node);
 
 public:
-    Union(int numberOfNode);
+    UnionFind(int numberOfNode);
     void connect(int node1, int node2);
     bool isConnected(int node1, int node2);
 

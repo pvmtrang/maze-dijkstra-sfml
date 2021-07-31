@@ -8,12 +8,13 @@
 
 class Node {
 private:
-    const int data;
+    int data;
 //    according to sfml coordinate, xy on top left, x_ y|
     int xCoord;
     int yCoord;
 public:
     static const int UNDEFINED = -1;    ; //This is just the declaration, the def is in cpp
+//    static const Node UNDEFINED_NODE(UNDEFINED);
 
     Node(int data);
 

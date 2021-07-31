@@ -94,10 +94,13 @@
 		<Unit filename="F:/edoc/c--/maze-sfml/headers/Graph.hpp">
 			<Option target="maze-sfml"/>
 		</Unit>
+		<Unit filename="F:/edoc/c--/maze-sfml/headers/Maze.hpp">
+			<Option target="maze-sfml"/>
+		</Unit>
 		<Unit filename="F:/edoc/c--/maze-sfml/headers/Node.hpp">
 			<Option target="maze-sfml"/>
 		</Unit>
-		<Unit filename="F:/edoc/c--/maze-sfml/headers/Union.hpp">
+		<Unit filename="F:/edoc/c--/maze-sfml/headers/UnionFind.hpp">
 			<Option target="maze-sfml"/>
 		</Unit>
 		<Unit filename="F:/edoc/c--/maze-sfml/src/Dijkstra.cpp">
@@ -106,10 +109,13 @@
 		<Unit filename="F:/edoc/c--/maze-sfml/src/Graph.cpp">
 			<Option target="maze-sfml"/>
 		</Unit>
+		<Unit filename="F:/edoc/c--/maze-sfml/src/Maze.cpp">
+			<Option target="maze-sfml"/>
+		</Unit>
 		<Unit filename="F:/edoc/c--/maze-sfml/src/Node.cpp">
 			<Option target="maze-sfml"/>
 		</Unit>
-		<Unit filename="F:/edoc/c--/maze-sfml/src/Union.cpp">
+		<Unit filename="F:/edoc/c--/maze-sfml/src/UnionFind.cpp">
 			<Option target="maze-sfml"/>
 		</Unit>
 		<Unit filename="F:/edoc/c--/maze-sfml/src/main.cpp">

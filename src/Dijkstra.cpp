@@ -11,14 +11,12 @@ const int Dijkstra::INFINITY;
 
 //checked
 Dijkstra::Dijkstra(const Graph &graph) : graph(graph) {
-//    this->graph = graph;
-    totalPathCost = 0;
+    totalPathCost = INFINITY;
     for (int i = 0; i < graph.getNumberOfNode(); i++) {
         open.push_back(true);
         closed.push_back(false);
-        previous.push_back(Graph::UNDEFINED);
+        previous.push_back(Node::UNDEFINED);
         distance.push_back(INFINITY);
-
     }
 }
 
@@ -34,7 +32,7 @@ bool Dijkstra::findShortestPath(int fromNode, int toNode) {
 
     while(isOpenEmpty()) {
         int currentNode = findMinDistance();
-        if (currentNode != Graph::UNDEFINED) {
+        if (currentNode != Node::UNDEFINED) {
             if (currentNode == toNode) {
                 traceBackPath(currentNode);
                 return true;
@@ -42,12 +40,13 @@ bool Dijkstra::findShortestPath(int fromNode, int toNode) {
 
             //remove from open
             open[currentNode] = false;
+            closed[currentNode] = true;
 
             std::vector<int> neighbor = graph.getNeighborNodes(currentNode);
 
             for(int n : neighbor) {
                 if (!closed[n]) {
-                    int tmp = distance[currentNode] + graph.getWeight(currentNode, n);
+                    int tmp = distance[currentNode] + graph.getDistance(currentNode, n);
                     if(tmp < distance[n]) {
                         distance[n] = tmp;
                         previous[n] = currentNode;
@@ -55,7 +54,7 @@ bool Dijkstra::findShortestPath(int fromNode, int toNode) {
                 }
             }
 
-            closed[currentNode] = true;
+
         }
     }
 
@@ -77,7 +76,7 @@ bool Dijkstra::isOpenEmpty() {
 
 void Dijkstra::traceBackPath(int currentNode) {
     totalPathCost = distance[currentNode];
-    while(previous[currentNode] != Graph::UNDEFINED) {
+    while(previous[currentNode] != Node::UNDEFINED) {
         finalPath.push_back(currentNode);
 //        std::cout << "current: " << currentNode << " ";
         currentNode = previous[currentNode];
@@ -91,7 +90,7 @@ void Dijkstra::traceBackPath(int currentNode) {
  */
 int Dijkstra::findMinDistance() {
     int minDist = INFINITY;
-    int minNode = Graph::UNDEFINED;
+    int minNode = Node::UNDEFINED;
     for (int i = 0; i < open.size(); i++) {
         if (open[i]) {
             if (distance[i] < minDist) {

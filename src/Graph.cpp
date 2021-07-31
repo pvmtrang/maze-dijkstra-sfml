@@ -26,6 +26,16 @@ void Graph::printGraph() {
     }
 }
 
+/** Clear the adjacency list.
+ *
+ */
+void Graph::clearGraph() {
+    for (int i = 0; i < numberOfNode; i++) {
+        graph[i].clear();
+    }
+}
+
+
 /**
  * Add two nodes to each other's adjacency list
  * @param node1
@@ -73,14 +83,25 @@ int Graph::getDistance(int node1, int node2) {
     return Node::UNDEFINED;
 }
 
+/**
+ * For the present, output also include that node which is on the front.
+ * Let's see if anything goes wrong
+ * @param node
+ * @return
+ */
 std::vector<int> Graph::getNeighborNodes(int node) {
+    std::vector<int>output;
+    for (Node &n : graph[node]) {
+        output.emplace_back(n.getData());
+    }
 
-    return std::vector<int>();
+    return output;
 }
 
 int Graph::getNumberOfNode() const {
     return numberOfNode;
 }
+
 
 
 

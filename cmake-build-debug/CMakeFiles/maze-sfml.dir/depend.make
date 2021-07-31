@@ -10,15 +10,23 @@ CMakeFiles/maze-sfml.dir/src/Graph.cpp.obj: ../headers/Graph.hpp
 CMakeFiles/maze-sfml.dir/src/Graph.cpp.obj: ../headers/Node.hpp
 CMakeFiles/maze-sfml.dir/src/Graph.cpp.obj: ../src/Graph.cpp
 
+CMakeFiles/maze-sfml.dir/src/Maze.cpp.obj: ../headers/Graph.hpp
+CMakeFiles/maze-sfml.dir/src/Maze.cpp.obj: ../headers/Maze.hpp
+CMakeFiles/maze-sfml.dir/src/Maze.cpp.obj: ../headers/Node.hpp
+CMakeFiles/maze-sfml.dir/src/Maze.cpp.obj: ../src/Maze.cpp
+
+CMakeFiles/maze-sfml.dir/src/Node.cpp.obj: ../headers/Graph.hpp
+CMakeFiles/maze-sfml.dir/src/Node.cpp.obj: ../headers/Maze.hpp
 CMakeFiles/maze-sfml.dir/src/Node.cpp.obj: ../headers/Node.hpp
 CMakeFiles/maze-sfml.dir/src/Node.cpp.obj: ../src/Node.cpp
 
-CMakeFiles/maze-sfml.dir/src/Union.cpp.obj: ../headers/Union.hpp
-CMakeFiles/maze-sfml.dir/src/Union.cpp.obj: ../src/Union.cpp
+CMakeFiles/maze-sfml.dir/src/UnionFind.cpp.obj: ../headers/UnionFind.hpp
+CMakeFiles/maze-sfml.dir/src/UnionFind.cpp.obj: ../src/UnionFind.cpp
 
 CMakeFiles/maze-sfml.dir/src/main.cpp.obj: ../headers/Dijkstra.hpp
 CMakeFiles/maze-sfml.dir/src/main.cpp.obj: ../headers/Graph.hpp
+CMakeFiles/maze-sfml.dir/src/main.cpp.obj: ../headers/Maze.hpp
 CMakeFiles/maze-sfml.dir/src/main.cpp.obj: ../headers/Node.hpp
-CMakeFiles/maze-sfml.dir/src/main.cpp.obj: ../headers/Union.hpp
+CMakeFiles/maze-sfml.dir/src/main.cpp.obj: ../headers/UnionFind.hpp
 CMakeFiles/maze-sfml.dir/src/main.cpp.obj: ../src/main.cpp
 

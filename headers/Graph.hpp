@@ -35,6 +35,8 @@ public:
 
     void printGraph();
 
+    void clearGraph();
+
     void addEdge(int node1, int node2);
 
     int getDistance(int node1, int node2);

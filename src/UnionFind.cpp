@@ -3,9 +3,9 @@
 //
 
 #include <iostream>
-#include "Union.hpp"
+#include "UnionFind.hpp"
 
-Union::Union(int numberOfNode) : numberOfNode(numberOfNode) {
+UnionFind::UnionFind(int numberOfNode) : numberOfNode(numberOfNode) {
     //each node is on its own component
     for (int i = 0; i < numberOfNode; i++) {
         id.push_back(i);
@@ -19,7 +19,7 @@ Union::Union(int numberOfNode) : numberOfNode(numberOfNode) {
  * @param node1
  * @param node2
  */
-void Union::connect(int node1, int node2) {
+void UnionFind::connect(int node1, int node2) {
     int root1 = findRoot(node1);
     id[node1] = root1;
     int root2 = findRoot(node2);
@@ -32,7 +32,7 @@ void Union::connect(int node1, int node2) {
  * @param node
  * @return the root
  */
-int Union::findRoot(int node) {
+int UnionFind::findRoot(int node) {
     while (id[node] != node) {
         //point the current node to its grandfather
         id[node] = id[id[node]];
@@ -42,12 +42,12 @@ int Union::findRoot(int node) {
 }
 
 //checked
-bool Union::isConnected(int node1, int node2) {
+bool UnionFind::isConnected(int node1, int node2) {
     return findRoot(node1) == findRoot(node2);
 }
 
 //checked
-void Union::printComponent() {
+void UnionFind::printComponent() {
     int currentNode = 0;
     std::vector<std::vector<int>> output;
     while (currentNode < numberOfNode) {

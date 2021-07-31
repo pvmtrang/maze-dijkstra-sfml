@@ -117,19 +117,19 @@ CMakeFiles/maze-sfml.dir/src/Dijkstra.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/maze-sfml.dir/src/Dijkstra.cpp.s"
 	C:\mingw64-7.3.0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S F:\edoc\c--\maze-sfml\src\Dijkstra.cpp -o CMakeFiles\maze-sfml.dir\src\Dijkstra.cpp.s
 
-CMakeFiles/maze-sfml.dir/src/Union.cpp.obj: CMakeFiles/maze-sfml.dir/flags.make
-CMakeFiles/maze-sfml.dir/src/Union.cpp.obj: CMakeFiles/maze-sfml.dir/includes_CXX.rsp
-CMakeFiles/maze-sfml.dir/src/Union.cpp.obj: ../src/Union.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=F:\edoc\c--\maze-sfml\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/maze-sfml.dir/src/Union.cpp.obj"
-	C:\mingw64-7.3.0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\maze-sfml.dir\src\Union.cpp.obj -c F:\edoc\c--\maze-sfml\src\Union.cpp
+CMakeFiles/maze-sfml.dir/src/UnionFind.cpp.obj: CMakeFiles/maze-sfml.dir/flags.make
+CMakeFiles/maze-sfml.dir/src/UnionFind.cpp.obj: CMakeFiles/maze-sfml.dir/includes_CXX.rsp
+CMakeFiles/maze-sfml.dir/src/UnionFind.cpp.obj: ../src/UnionFind.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=F:\edoc\c--\maze-sfml\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/maze-sfml.dir/src/UnionFind.cpp.obj"
+	C:\mingw64-7.3.0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\maze-sfml.dir\src\UnionFind.cpp.obj -c F:\edoc\c--\maze-sfml\src\UnionFind.cpp
 
-CMakeFiles/maze-sfml.dir/src/Union.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/maze-sfml.dir/src/Union.cpp.i"
-	C:\mingw64-7.3.0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E F:\edoc\c--\maze-sfml\src\Union.cpp > CMakeFiles\maze-sfml.dir\src\Union.cpp.i
+CMakeFiles/maze-sfml.dir/src/UnionFind.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/maze-sfml.dir/src/UnionFind.cpp.i"
+	C:\mingw64-7.3.0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E F:\edoc\c--\maze-sfml\src\UnionFind.cpp > CMakeFiles\maze-sfml.dir\src\UnionFind.cpp.i
 
-CMakeFiles/maze-sfml.dir/src/Union.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/maze-sfml.dir/src/Union.cpp.s"
-	C:\mingw64-7.3.0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S F:\edoc\c--\maze-sfml\src\Union.cpp -o CMakeFiles\maze-sfml.dir\src\Union.cpp.s
+CMakeFiles/maze-sfml.dir/src/UnionFind.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/maze-sfml.dir/src/UnionFind.cpp.s"
+	C:\mingw64-7.3.0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S F:\edoc\c--\maze-sfml\src\UnionFind.cpp -o CMakeFiles\maze-sfml.dir\src\UnionFind.cpp.s
 
 CMakeFiles/maze-sfml.dir/src/Node.cpp.obj: CMakeFiles/maze-sfml.dir/flags.make
 CMakeFiles/maze-sfml.dir/src/Node.cpp.obj: CMakeFiles/maze-sfml.dir/includes_CXX.rsp
@@ -145,13 +145,28 @@ CMakeFiles/maze-sfml.dir/src/Node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/maze-sfml.dir/src/Node.cpp.s"
 	C:\mingw64-7.3.0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S F:\edoc\c--\maze-sfml\src\Node.cpp -o CMakeFiles\maze-sfml.dir\src\Node.cpp.s
 
+CMakeFiles/maze-sfml.dir/src/Maze.cpp.obj: CMakeFiles/maze-sfml.dir/flags.make
+CMakeFiles/maze-sfml.dir/src/Maze.cpp.obj: CMakeFiles/maze-sfml.dir/includes_CXX.rsp
+CMakeFiles/maze-sfml.dir/src/Maze.cpp.obj: ../src/Maze.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=F:\edoc\c--\maze-sfml\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/maze-sfml.dir/src/Maze.cpp.obj"
+	C:\mingw64-7.3.0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\maze-sfml.dir\src\Maze.cpp.obj -c F:\edoc\c--\maze-sfml\src\Maze.cpp
+
+CMakeFiles/maze-sfml.dir/src/Maze.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/maze-sfml.dir/src/Maze.cpp.i"
+	C:\mingw64-7.3.0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E F:\edoc\c--\maze-sfml\src\Maze.cpp > CMakeFiles\maze-sfml.dir\src\Maze.cpp.i
+
+CMakeFiles/maze-sfml.dir/src/Maze.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/maze-sfml.dir/src/Maze.cpp.s"
+	C:\mingw64-7.3.0\mingw32\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S F:\edoc\c--\maze-sfml\src\Maze.cpp -o CMakeFiles\maze-sfml.dir\src\Maze.cpp.s
+
 # Object files for target maze-sfml
 maze__sfml_OBJECTS = \
 "CMakeFiles/maze-sfml.dir/src/main.cpp.obj" \
 "CMakeFiles/maze-sfml.dir/src/Graph.cpp.obj" \
 "CMakeFiles/maze-sfml.dir/src/Dijkstra.cpp.obj" \
-"CMakeFiles/maze-sfml.dir/src/Union.cpp.obj" \
-"CMakeFiles/maze-sfml.dir/src/Node.cpp.obj"
+"CMakeFiles/maze-sfml.dir/src/UnionFind.cpp.obj" \
+"CMakeFiles/maze-sfml.dir/src/Node.cpp.obj" \
+"CMakeFiles/maze-sfml.dir/src/Maze.cpp.obj"
 
 # External object files for target maze-sfml
 maze__sfml_EXTERNAL_OBJECTS =
@@ -159,8 +174,9 @@ maze__sfml_EXTERNAL_OBJECTS =
 maze-sfml.exe: CMakeFiles/maze-sfml.dir/src/main.cpp.obj
 maze-sfml.exe: CMakeFiles/maze-sfml.dir/src/Graph.cpp.obj
 maze-sfml.exe: CMakeFiles/maze-sfml.dir/src/Dijkstra.cpp.obj
-maze-sfml.exe: CMakeFiles/maze-sfml.dir/src/Union.cpp.obj
+maze-sfml.exe: CMakeFiles/maze-sfml.dir/src/UnionFind.cpp.obj
 maze-sfml.exe: CMakeFiles/maze-sfml.dir/src/Node.cpp.obj
+maze-sfml.exe: CMakeFiles/maze-sfml.dir/src/Maze.cpp.obj
 maze-sfml.exe: CMakeFiles/maze-sfml.dir/build.make
 maze-sfml.exe: C:/SFML/lib/libsfml-system-d.a
 maze-sfml.exe: C:/SFML/lib/libsfml-window-d.a
@@ -170,7 +186,7 @@ maze-sfml.exe: C:/SFML/lib/libsfml-audio-d.a
 maze-sfml.exe: CMakeFiles/maze-sfml.dir/linklibs.rsp
 maze-sfml.exe: CMakeFiles/maze-sfml.dir/objects1.rsp
 maze-sfml.exe: CMakeFiles/maze-sfml.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=F:\edoc\c--\maze-sfml\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable maze-sfml.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=F:\edoc\c--\maze-sfml\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable maze-sfml.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\maze-sfml.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

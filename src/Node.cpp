@@ -4,10 +4,13 @@
 
 #include <iostream>
 #include "Node.hpp"
+#include "Maze.hpp"
 
 const int Node::UNDEFINED;  //this is the definition of a (static) const. *mindblow*
 
-Node::Node(int data) : data(data), xCoord(UNDEFINED), yCoord(UNDEFINED) {
+Node::Node(int data) : data(data) {
+    xCoord = data % Maze::WIDTH;
+    yCoord = (data - xCoord) / Maze::WIDTH;
 }
 
 int Node::getData() const {

@@ -10,15 +10,23 @@ CMakeFiles/maze-sfml.dir/src/Graph.cpp.obj
  ../headers/Graph.hpp
  ../headers/Node.hpp
  F:/edoc/c--/maze-sfml/src/Graph.cpp
+CMakeFiles/maze-sfml.dir/src/Maze.cpp.obj
+ ../headers/Graph.hpp
+ ../headers/Maze.hpp
+ ../headers/Node.hpp
+ F:/edoc/c--/maze-sfml/src/Maze.cpp
 CMakeFiles/maze-sfml.dir/src/Node.cpp.obj
+ ../headers/Graph.hpp
+ ../headers/Maze.hpp
  ../headers/Node.hpp
  F:/edoc/c--/maze-sfml/src/Node.cpp
-CMakeFiles/maze-sfml.dir/src/Union.cpp.obj
- ../headers/Union.hpp
- F:/edoc/c--/maze-sfml/src/Union.cpp
+CMakeFiles/maze-sfml.dir/src/UnionFind.cpp.obj
+ ../headers/UnionFind.hpp
+ F:/edoc/c--/maze-sfml/src/UnionFind.cpp
 CMakeFiles/maze-sfml.dir/src/main.cpp.obj
  ../headers/Dijkstra.hpp
  ../headers/Graph.hpp
+ ../headers/Maze.hpp
  ../headers/Node.hpp
- ../headers/Union.hpp
+ ../headers/UnionFind.hpp
  F:/edoc/c--/maze-sfml/src/main.cpp

@@ -6,8 +6,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "F:/edoc/c--/maze-sfml/src/Dijkstra.cpp" "F:/edoc/c--/maze-sfml/cmake-build-debug/CMakeFiles/maze-sfml.dir/src/Dijkstra.cpp.obj"
   "F:/edoc/c--/maze-sfml/src/Graph.cpp" "F:/edoc/c--/maze-sfml/cmake-build-debug/CMakeFiles/maze-sfml.dir/src/Graph.cpp.obj"
+  "F:/edoc/c--/maze-sfml/src/Maze.cpp" "F:/edoc/c--/maze-sfml/cmake-build-debug/CMakeFiles/maze-sfml.dir/src/Maze.cpp.obj"
   "F:/edoc/c--/maze-sfml/src/Node.cpp" "F:/edoc/c--/maze-sfml/cmake-build-debug/CMakeFiles/maze-sfml.dir/src/Node.cpp.obj"
-  "F:/edoc/c--/maze-sfml/src/Union.cpp" "F:/edoc/c--/maze-sfml/cmake-build-debug/CMakeFiles/maze-sfml.dir/src/Union.cpp.obj"
+  "F:/edoc/c--/maze-sfml/src/UnionFind.cpp" "F:/edoc/c--/maze-sfml/cmake-build-debug/CMakeFiles/maze-sfml.dir/src/UnionFind.cpp.obj"
   "F:/edoc/c--/maze-sfml/src/main.cpp" "F:/edoc/c--/maze-sfml/cmake-build-debug/CMakeFiles/maze-sfml.dir/src/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
