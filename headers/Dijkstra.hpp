@@ -29,13 +29,13 @@ private:
 
     int findMinDistance();
 
-    void traceBackPath(int currentNode);
+    void traceBackFinalPath(int currentNode);
 
 public:
 //    explicit is for prevent constructor from implicit convert param type
     explicit Dijkstra(const Graph &graph);
 
-    bool findShortestPath(int fromNode, int ToNode);
+    void findShortestPath(int fromNode, int ToNode);
 
 //    [nodiscard] raises warning if the return value of the function is ignored
     [[nodiscard]] int getTotalPathCost() const;

@@ -57,7 +57,12 @@ int main() {
     u.printComponent();*/
 
     Maze maze;
-    maze.generateMaze(1);
+    maze.generateMaze();
+    std::cout << "weighted graph\n";
+    maze.generateWeightedGraph();
+
+    Dijkstra djk(maze.getWeightedGraph());
+    djk.findShortestPath(0, 29);
 
 //    std::cout << (-5) % 5;
     /*std::vector<int> tmp;

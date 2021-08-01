@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <algorithm>
 #include "Graph.hpp"
 
 
@@ -18,7 +19,7 @@ Graph::~Graph() {
 
 void Graph::printGraph() {
     for (int i = 0; i < getNumberOfNode(); i++) {
-        std::cout << i << ": ";
+//        std::cout << i << ": ";
         for (Node &n : graph[i]) {
             std::cout << n.getData() << " ";
         }
@@ -45,17 +46,27 @@ void Graph::clearGraph() {
  */
 void Graph::addEdge(int node1, int node2) {
     if (node1 >= getNumberOfNode() || node2 >= getNumberOfNode()) {
-        std::cerr << "idiot add nodes that doesnt exist. Try something smaller than the capacity.";
+        std::cerr << "idiot add nodes that doesnt exist. Try something smaller than the capacity." << std::endl;
         return;
-    }
-    Node newNode1(node1);
-    Node newNode2(node2);
-    graph[node1].emplace_after(graph[node1].begin(), newNode2);
-    graph[node2].emplace_after(graph[node2].begin(), newNode1);
+    } else if (node1 == node2) {
+        std::cerr << "node1 and node2 are both equal to: " << node1 << std::endl;
+        return;
+    } else {
+        Node newNode1(node1);
+        Node newNode2(node2);
+        if (std::count(graph[node1].begin(), graph[node1].end(), node2)) {
+            std::cerr << "Node " << node1 << " is already connected to node " << node2 << std::endl;
+        }
+        else if (std::count(graph[node2].begin(), graph[node2].end(), node1)) {
+            std::cerr << "Node " << node2 << " is already connected to node " << node1 << std::endl;
+        } else {
+            graph[node1].emplace_after(graph[node1].begin(), newNode2);
+            graph[node2].emplace_after(graph[node2].begin(), newNode1);
+        }
 
-//    in case i'm an idiot and connect two already-connected nodes
-    graph[node1].unique();
-    graph[node2].unique();
+
+    }
+
 
 }
 
@@ -84,14 +95,17 @@ int Graph::getDistance(int node1, int node2) {
 }
 
 /**
- * For the present, output also include that node which is on the front.
- * Let's see if anything goes wrong
+ * Only return the neighbor.
+ * Omit the node standing in the front
  * @param node
  * @return
  */
 std::vector<int> Graph::getNeighborNodes(int node) {
     std::vector<int>output;
     for (Node &n : graph[node]) {
+        if (n == node) {
+            continue;
+        }
         output.emplace_back(n.getData());
     }
 

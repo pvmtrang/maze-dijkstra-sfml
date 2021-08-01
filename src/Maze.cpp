@@ -13,9 +13,8 @@ const int HEIGHT = 5;
 const int NUMBER_OF_CELL = WIDTH * HEIGHT;
 
 //set value like this only work with 0
-Maze::Maze() : cellStatus{IS_WALL}, graph(NUMBER_OF_CELL){
+Maze::Maze() : mazeGraph(NUMBER_OF_CELL), weightedGraph(NUMBER_OF_CELL){
     srand((int) time(0));
-// ??? does this work?   graph = Graph(NUMBER_OF_CELL);
 
 }
 
@@ -25,36 +24,37 @@ Maze::Maze() : cellStatus{IS_WALL}, graph(NUMBER_OF_CELL){
  */
 void Maze::generateMaze(int fromNode) {
 //    come back to this later. To generate maze more than once
-//    graph.clearGraph();
+//    mazeGraph.clearGraph();
 
-    addedGraphNode.emplace_back(Node(fromNode));
 
-    //while not all nodes are in graph
-    while(addedGraphNode.size() != NUMBER_OF_CELL) {
-        //Choose a random node in graph
-        Node randomNode = getRandomNode(addedGraphNode);
-        //Connect to a random neighbor node that is not in graph
+    addedToGraphNode.emplace_back(Node(fromNode));
+
+    //while not all nodes are in mazeGraph
+    while(addedToGraphNode.size() != NUMBER_OF_CELL) {
+        //Choose a random node in mazeGraph
+        Node randomNode = getRandomNode(addedToGraphNode);
+        //Connect to a random neighbor node that is not in mazeGraph
         std::vector<Node> neighbors = getUnvisitedNeighborNode(randomNode);
         Node randomNeighbor = getRandomNode(neighbors);
         //if there's no unvisited neighbor nodes -> skip this one;
         if (randomNeighbor.getData() == Node::UNDEFINED) {
             continue;
         } else {
-//this shit is fucking suspicious
-            graph.addEdge(randomNode.getData(), randomNeighbor.getData());
-            //Add that neighbor to graph
-            addedGraphNode.emplace_back(randomNeighbor);
+//this shit is so suspicious
+            mazeGraph.addEdge(randomNode.getData(), randomNeighbor.getData());
+            //Add that neighbor to mazeGraph
+            addedToGraphNode.emplace_back(randomNeighbor);
         }
-
     }
-    graph.printGraph();
+    mazeGraph.printGraph();
 
 }
 
 /**
  * To choose a random node from a set.
  * No deletion or anything
- * @param nodeSet: this set might be addedGraphNode or getNeighborNode
+ * Is used in generating maze
+ * @param nodeSet: this set might be addedToGraphNode or getNeighborNode
  * @return a Node with data UNDEFINED when there's none to return, else return a random from nodeSet.
  */
 // how about return a null node??
@@ -62,14 +62,15 @@ Node Maze::getRandomNode(std::vector<Node> nodeSet) {
     if (nodeSet.empty()) {
         return Node(Node::UNDEFINED);
     }
-    int randomIndex = rand() % nodeSet.size();
+    unsigned int randomIndex = rand() % nodeSet.size();
     Node randomNode = nodeSet[randomIndex];
 
     return randomNode;
 }
 
 /**
- * Find all node that is a valid node and not added in graph next to the given node.
+ * Find all node that is a valid node and not added in mazeGraph next to the given node.
+ * Is used in generating maze
  * @param n
  * @return the set of all qualified nodes
  */
@@ -114,31 +115,103 @@ std::vector<Node> Maze::getUnvisitedNeighborNode(Node n) {
 }
 
 /**
- * Check if a node n is already in graph.
- * A node in graph = a node in addedGraphNode = a node has neighbor
+ * Check if a node n is already in mazeGraph.
+ * A node in mazeGraph = a node in addedToGraphNode = a node has neighbor
  * @param n
- * @return if it's already added in graph
+ * @return if it's already added in mazeGraph
  */
 bool Maze::isInGraph(Node n) {
-    return std::count(addedGraphNode.begin(), addedGraphNode.end(), n);
+    return std::count(addedToGraphNode.begin(), addedToGraphNode.end(), n);
 }
 
 void Maze::printMaze() {
-    for (int i = 0; i < HEIGHT; i++) {
-        for (int j = 0; j < WIDTH; j++) {
-            switch (cellStatus[i][j]) {
-                case IS_WALL:
-                    std::cout << "w";
-                    break;
-                case IS_PATH:
-                    std::cout << "p";
-            }
+    std::cout << "havent figured out yet" << std::endl;
+}
 
+
+Graph Maze::getMazeGraph() {
+    return mazeGraph;
+}
+
+//Chua nghi den viec them start va end node vao kieu gi
+//Or de mac dinh start la 0 va end la 29: 2 node nay luon qualified
+void Maze::generateWeightedGraph() {
+//1. find all possible qualified node
+    std::vector<int> qualifiedNode;
+    for (int i = 0; i < mazeGraph.getNumberOfNode(); i++) {
+        if (isQualifiedForWeightedGraph(i)) {
+            qualifiedNode.emplace_back(i);
         }
-        std::cout << std::endl;
+    }
+//2. generate the weighted graph
+//    weightedGraph = Graph(qualifiedNode.size());
+
+    for (int iQualifiedNode : qualifiedNode) {
+        //loop through it's neighbor
+        for (int iNeighbor : mazeGraph.getNeighborNodes(iQualifiedNode)) {
+            //if that neighbor is qualified -> create an edge for weighted graph
+            if (isQualifiedForWeightedGraph(iNeighbor)) {
+                weightedGraph.addEdge(iQualifiedNode, iNeighbor);
+            } else {
+            // dig depth into neighbor's neighbor until reach the first qualified node
+                int nextQualified = findNextQualifiedNode(iNeighbor);
+                weightedGraph.addEdge(iQualifiedNode, nextQualified);
+
+            }
+        }
     }
 
+    weightedGraph.printGraph();
+//    return weightedGraph;
 }
+
+//this is like depth first search without backtracking
+//take the first neighbor in the neighbor set
+//and keep digging into that first neighbor's first neighbor
+int Maze::findNextQualifiedNode(int node) {
+    int firstNeighbor = mazeGraph.getNeighborNodes(node)[0];
+    if (isQualifiedForWeightedGraph(firstNeighbor)) {
+        return firstNeighbor;
+    }
+    return findNextQualifiedNode(firstNeighbor);
+}
+
+/**
+ * A node addable to a weighted graph can be a dead-end, a turn or a junction, except for the start and end node.
+ * Recognize by the number of neighbor node in mazegraph
+ *  1 neighbor -> dead end
+ *  2 neighbors: if in different col and row -> turn
+ *  >2 neighbors: junction
+ */
+bool Maze::isQualifiedForWeightedGraph(int node) {
+    std::vector<int> neighbor = mazeGraph.getNeighborNodes(node);
+    switch (neighbor.size()) {
+        case 0: {//might not happen. Forse
+            return false;
+        }
+        case 1: {// 1 neighbor = a dead end
+            return true;
+        }
+        case 2: {
+            Node n1(neighbor[0]);
+            Node n2(neighbor[1]);
+            // 2 neighbor not on the same col or row aka a turn
+            if (n1.getXCoord() == n2.getXCoord() || n1.getYCoord() == n2.getYCoord()) {
+                return false;
+            }
+            return true;
+        }
+        default: // >2 neighbor aka a junction
+            return true;
+    }
+}
+
+Graph Maze::getWeightedGraph() {
+//    generateWeightedGraph();
+    return weightedGraph;
+}
+
+
 
 
 

@@ -18,24 +18,33 @@ public:
 
     Maze();
 
-    void generateMaze(int fromNode);
+    void generateMaze(int fromNode = 0);
+
+    Graph getMazeGraph();
+
+    void generateWeightedGraph();
+
+    Graph getWeightedGraph();
 
 private:
-    static const int IS_PATH = 1;
-    static const int IS_WALL = 0;
-    static const char PATH = ' ';
-    static const char WALL = '#';
+    Graph mazeGraph;
 
-    Graph graph;
+    Graph weightedGraph;
 
-    bool cellStatus[HEIGHT][WIDTH];
-    std::vector<Node> addedGraphNode;
+    //cant make this local variable because not only generateMaze
+    //it's also related to getUnvisitedNeighbor, and isInGraph
+    std::vector<Node> addedToGraphNode;
 
     Node getRandomNode(std::vector<Node> nodeSet);
 
     bool isInGraph(Node n);
 
     std::vector<Node> getUnvisitedNeighborNode(Node n);
+
+    bool isQualifiedForWeightedGraph(int node);
+
+    int findNextQualifiedNode(int node);
+
     void printMaze();
 
 };

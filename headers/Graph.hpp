@@ -11,7 +11,7 @@
 #include "Node.hpp"
 
 /**
- ** Maintaining graph by a adjacency list.
+ ** Maintaining mazeGraph by a adjacency list.
  * implemented by a vector of linked list
  * Adjacency list:
  * [0]: Node(0) -> neighbor -> nodes -> in -> reverse -> inserted -> order
@@ -21,7 +21,7 @@
 class Graph {
 private:
 //    adjacency matrix
-//    std::vector<std::vector<int>> graph;
+//    std::vector<std::vector<int>> mazeGraph;
 //    adjacency list
     std::vector<std::forward_list<Node>> graph;
     

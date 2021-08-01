@@ -13,10 +13,10 @@ const int Dijkstra::INFINITY;
 Dijkstra::Dijkstra(const Graph &graph) : graph(graph) {
     totalPathCost = INFINITY;
     for (int i = 0; i < graph.getNumberOfNode(); i++) {
-        open.push_back(true);
-        closed.push_back(false);
-        previous.push_back(Node::UNDEFINED);
-        distance.push_back(INFINITY);
+        open.emplace_back(true);
+        closed.emplace_back(false);
+        previous.emplace_back(Node::UNDEFINED);
+        distance.emplace_back(INFINITY);
     }
 }
 
@@ -27,15 +27,20 @@ Dijkstra::Dijkstra(const Graph &graph) : graph(graph) {
  * @param toNode
  * @return true if there's a path
  */
-bool Dijkstra::findShortestPath(int fromNode, int toNode) {
+void Dijkstra::findShortestPath(int fromNode, int toNode) {
     distance[fromNode] = 0;
 
     while(isOpenEmpty()) {
         int currentNode = findMinDistance();
+        //when there's still open neighbor
         if (currentNode != Node::UNDEFINED) {
             if (currentNode == toNode) {
-                traceBackPath(currentNode);
-                return true;
+                traceBackFinalPath(currentNode);
+                std::cout << std::endl << "final shortest path is: ";
+                for (int i : finalPath) {
+                    std::cout << i << " ";
+                }
+                return;
             }
 
             //remove from open
@@ -53,12 +58,10 @@ bool Dijkstra::findShortestPath(int fromNode, int toNode) {
                     }
                 }
             }
-
-
         }
     }
-
-    return false;
+    std::cout << std::endl << "No path found" << std::endl;
+//    return;
 }
 
 /**
@@ -74,19 +77,22 @@ bool Dijkstra::isOpenEmpty() {
     return false;
 }
 
-void Dijkstra::traceBackPath(int currentNode) {
+void Dijkstra::traceBackFinalPath(int currentNode) {
     totalPathCost = distance[currentNode];
     while(previous[currentNode] != Node::UNDEFINED) {
-        finalPath.push_back(currentNode);
+        finalPath.emplace_back(currentNode);
 //        std::cout << "current: " << currentNode << " ";
         currentNode = previous[currentNode];
     }
+    //add the starting node also
+    finalPath.emplace_back(currentNode);
     std::reverse(finalPath.begin(),finalPath.end());
 }
 
 /**
  * Find the node with minimum distance among the open nodes.
- * @return the name aka the index of the node
+ * @return node with undefined data when cant find the min distance aka. there's no closed neighbors left
+ * else just return the node with min distance
  */
 int Dijkstra::findMinDistance() {
     int minDist = INFINITY;
@@ -101,8 +107,6 @@ int Dijkstra::findMinDistance() {
     }
     return minNode;
 }
-
-
 
 void Dijkstra::printGraph() {
     graph.printGraph();

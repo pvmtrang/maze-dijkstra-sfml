@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+../headers/Dijkstra.hpp
+Graph.hpp
+../headers/Graph.hpp
+
 ../headers/Graph.hpp
 vector
 -
@@ -24,15 +28,35 @@ Graph.hpp
 
 ../headers/Node.hpp
 
-F:/edoc/c--/maze-sfml/src/Maze.cpp
-cstdlib
+../headers/UnionFind.hpp
+vector
 -
-ctime
--
+
+F:/edoc/c--/maze-sfml/src/Dijkstra.cpp
 iostream
 -
 algorithm
 -
+Dijkstra.hpp
+F:/edoc/c--/maze-sfml/src/Dijkstra.hpp
+Graph.hpp
+F:/edoc/c--/maze-sfml/src/Graph.hpp
+
+F:/edoc/c--/maze-sfml/src/main.cpp
+iostream
+-
+Graph.hpp
+-
+Dijkstra.hpp
+-
+UnionFind.hpp
+F:/edoc/c--/maze-sfml/src/UnionFind.hpp
+Node.hpp
+F:/edoc/c--/maze-sfml/src/Node.hpp
 Maze.hpp
 F:/edoc/c--/maze-sfml/src/Maze.hpp
+string.h
+-
+algorithm
+-
 
