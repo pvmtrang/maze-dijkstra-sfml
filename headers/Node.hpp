@@ -10,8 +10,6 @@
 
 class Node : public sf::Drawable {
 private:
-
-
     int data;
 //    according to sfml coordinate, xy on top left, x_ y|
     int xCoord;
@@ -21,16 +19,21 @@ private:
 
 public:
     static const int UNDEFINED = -1;    ; //This is just the declaration, the def is in cpp
-    static const int SIZE_NODE = 50;
-    static const int SIZE_BORDER= -10;
+    static const int SIZE_CELL = 40;
+    static const int SIZE_BORDER = 10;
+    static const int SIZE_NODE = SIZE_CELL - 2 * SIZE_BORDER;
 
-    const sf::Color COLOR_NODE = sf::Color::White;
-    const sf::Color COLOR_BORDER = sf::Color::Red;
+    sf::Color COLOR_NODE {sf::Color::White};
+//    const sf::Color COLOR_BORDER {sf::Color::Red};
 
 
-    Node(int data);
+    Node(int data = UNDEFINED);
 
-    int getData() const;
+//    Node(Node &other);
+
+    int getData();
+
+    void setData(int data);
 
     int getXCoord() const;
 

@@ -11,7 +11,7 @@
 #include <Graph.hpp>
 #include <SFML/Graphics.hpp>
 
-class Maze {
+class Maze : public sf::Drawable {
 public:
     static const int WIDTH = 6;
     static const int HEIGHT = 5;
@@ -19,7 +19,7 @@ public:
 
     Maze();
 
-    void generateMaze(int fromNode = 0);
+    void generateMaze( sf::RenderTarget& target, int fromNode = 0);
 
     Graph getMazeGraph();
 
@@ -27,8 +27,12 @@ public:
 
     Graph getWeightedGraph();
 
+    void draw(sf::RenderTarget& target, sf::RenderStates state = sf::RenderStates::Default) const override;
 
 private:
+    const sf::Color COLOR_MAZE_GRAPH{ sf::Color::Cyan};
+    const sf::Color COLOR_WEIGHTED_GRAPH{sf::Color::Blue};
+
     Graph mazeGraph;
 
     Graph weightedGraph;

@@ -61,21 +61,35 @@ void Graph::addEdge(int node1, int node2) {
         } else {
             graph[node1].emplace_after(graph[node1].begin(), newNode2);
             graph[node2].emplace_after(graph[node2].begin(), newNode1);
+            std::cout << "is connecting node " << node1 << " and node " << node2 << std::endl;
             addToColoredEdge(newNode1, newNode2);
         }
     }
 }
 
+//arrange node to draw from left to right, node1 < node2
 void Graph::addToColoredEdge(Node node1, Node node2) {
-    int width = (node2.getXCoord() + 1 - node1.getXCoord()) * Node::SIZE_NODE;
-    int height = (node2.getYCoord() + 1 - node1.getYCoord()) * Node::SIZE_NODE;
+    if (node1.getData() > node2.getData()) {
+        Node tmp = node1;
+        node1 = node2;
+        node2 = tmp;
+    }
+    int width = (node2.getXCoord() + 1 - node1.getXCoord()) * Node::SIZE_CELL - 2 * Node::SIZE_BORDER;
+    int height = (node2.getYCoord() + 1 - node1.getYCoord()) * Node::SIZE_CELL - 2 * Node::SIZE_BORDER;
+    /*int width = 50;
+    int height = 30;*/
 
     sf::RectangleShape rectangle(sf::Vector2f(width, height));
 
-    rectangle.setPosition(node1.getXCoord(), node1.getYCoord());
+    //why cant setPosition(node1.getShape().getPosition())????
+    rectangle.setPosition(sf::Vector2f(node1.getXCoord() * Node::SIZE_CELL + Node::SIZE_BORDER,
+                                       node1.getYCoord() * Node::SIZE_CELL + Node::SIZE_BORDER));
+
+//    rectangle.setPosition(node1.getShape().getPosition());
     rectangle.setFillColor(color);
 //    hmmm how to change this shit color not by magic color var
-    rectangle.setOutlineColor(sf::Color::Cyan);
+//    rectangle.setOutlineColor(sf::Color::Red);
+//    rectangle.setOutlineThickness(Node::SIZE_BORDER);
 
     coloredEdge.emplace_back(rectangle);
 }
@@ -130,6 +144,7 @@ int Graph::getNumberOfNode() const {
 
 void Graph::draw(sf::RenderTarget &target, sf::RenderStates state) const {
     for (int i = 0; i < coloredEdge.size(); i++) {
+//        std::cout << "is drawing edge " << i << std::endl;
         target.draw(coloredEdge[i]);
     }
 }

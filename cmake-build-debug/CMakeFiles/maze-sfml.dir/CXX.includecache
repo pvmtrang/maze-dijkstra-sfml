@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-../headers/Dijkstra.hpp
-Graph.hpp
-../headers/Graph.hpp
-
 ../headers/Graph.hpp
 vector
 -
@@ -30,10 +26,6 @@ SFML/Graphics.hpp
 
 ../headers/Node.hpp
 SFML/Graphics.hpp
--
-
-../headers/UnionFind.hpp
-vector
 -
 
 C:/SFML/include/SFML/Config.hpp
@@ -706,23 +698,15 @@ SFML/Config.hpp
 
 C:/SFML/include/SFML/Window/WindowStyle.hpp
 
-F:/edoc/c--/maze-sfml/src/main.cpp
+F:/edoc/c--/maze-sfml/src/Maze.cpp
+cstdlib
+-
+ctime
+-
 iostream
--
-SFML/Graphics.hpp
--
-Graph.hpp
--
-Dijkstra.hpp
--
-UnionFind.hpp
-F:/edoc/c--/maze-sfml/src/UnionFind.hpp
-Node.hpp
-F:/edoc/c--/maze-sfml/src/Node.hpp
-Maze.hpp
-F:/edoc/c--/maze-sfml/src/Maze.hpp
-string.h
 -
 algorithm
 -
+Maze.hpp
+F:/edoc/c--/maze-sfml/src/Maze.hpp
 

@@ -28,25 +28,22 @@ void takeInput(sf::RenderWindow &window) {
 }
 
 int main() {
-    static const int SCALED_WIDTH = Maze::WIDTH * Node::SIZE_NODE;
-    static const int SCALED_HEIGHT = Maze::HEIGHT * Node::SIZE_NODE;
-
-    std::vector<sf::RectangleShape> vec;
-    int tmp = 0;
+    static const int SCALED_WIDTH = Maze::WIDTH * Node::SIZE_CELL;
+    static const int SCALED_HEIGHT = Maze::HEIGHT * Node::SIZE_CELL;
 
     sf::RenderWindow window(sf::VideoMode(SCALED_WIDTH, SCALED_HEIGHT), "Mazzzze", sf::Style::Default);
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(51);
 
-    Graph g(200);
+    Maze maze;
+
+//    Maze::countMazeGenerated = 0;
+//    Graph g(30);
+
 
     while (window.isOpen()) {
-        if (tmp < 150) {
-            g.addEdge(tmp, tmp + 3);
-            tmp += 1;
-        }
+        maze.generateMaze(window);
 
-        g.draw(window);
-
+        maze.draw(window);
 
         window.display();
         window.clear(sf::Color::Black);
@@ -54,12 +51,8 @@ int main() {
 
 
     }
-    window.setFramerateLimit(50);
 
-
-
-
-
+    std::cout << "finished";
 
 //    Dijkstra djk(maze.getWeightedGraph());
 //    djk.findShortestPath(0, 29);

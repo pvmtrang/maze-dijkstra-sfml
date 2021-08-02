@@ -12,3 +12,4 @@
     https://stackoverflow.com/questions/15520880/initializing-entire-2d-array-with-one-value
   memset only works with value 0 and -1
     https://www.geeksforgeeks.org/memset-in-cpp/
+- Luc ve node ko dung duoc border thickness nua vi no se bi de vao nhau

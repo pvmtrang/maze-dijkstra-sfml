@@ -8,13 +8,10 @@
 #include <algorithm>
 #include "Maze.hpp"
 
-static const int WIDTH = 6;
-static const int HEIGHT = 5;
-//const int NUMBER_OF_CELL = WIDTH * HEIGHT;
-
 //set value like this only work with 0
 Maze::Maze() : mazeGraph(NUMBER_OF_CELL), weightedGraph(NUMBER_OF_CELL) {
     srand((int) time(0));
+//    countMazeGenerated = 0;
 
 }
 
@@ -22,16 +19,19 @@ Maze::Maze() : mazeGraph(NUMBER_OF_CELL), weightedGraph(NUMBER_OF_CELL) {
  * Using prim to generate maze
  * @param fromNode
  */
-void Maze::generateMaze(int fromNode) {
-//    come back to this later. To generate maze more than once
-//    mazeGraph.clearGraph();
-
-
-    addedToGraphNode.emplace_back(Node(fromNode));
-//    Node(fromNode).render(Painter::getWindow(), sf::Color::White);
-
+void Maze::generateMaze( sf::RenderTarget& target, int fromNode) {
     //while not all nodes are in mazeGraph
-    while(addedToGraphNode.size() != NUMBER_OF_CELL) {
+    if (addedToGraphNode.size() < NUMBER_OF_CELL) {
+        std::cout << "is drawing maze from node " << fromNode << std::endl;
+
+        //Because of recursion, there might be a (lot of) chance
+        //that fromNode is already added in the vector
+        //because fromNode is randomly choose from the neighbor set
+        //i feel like my above explanation is wrong somewhere but i'm in a hurry so whatever
+        if (!isInGraph(fromNode)) {
+            addedToGraphNode.emplace_back(Node(fromNode));
+        }
+
         //Choose a random node in mazeGraph
         Node randomNode = getRandomNode(addedToGraphNode);
         //Connect to a random neighbor node that is not in mazeGraph
@@ -39,17 +39,48 @@ void Maze::generateMaze(int fromNode) {
         Node randomNeighbor = getRandomNode(neighbors);
         //if there's no unvisited neighbor nodes -> skip this one;
         if (randomNeighbor.getData() == Node::UNDEFINED) {
-            continue;
+//            continue;
         } else {
 //this shit is so suspicious
             mazeGraph.addEdge(randomNode.getData(), randomNeighbor.getData());
+
+            draw(target);
+
             //Add that neighbor to mazeGraph
-            addedToGraphNode.emplace_back(randomNeighbor);
+//            addedToGraphNode.emplace_back(randomNeighbor);
+            generateMaze(target, randomNeighbor.getData());
+
         }
     }
-    mazeGraph.printGraph();
-
 }
+
+/*void Maze::generateMaze( sf::RenderTarget& target, int fromNode) {
+    if (countMazeGenerated <= 1) {
+        std::cout << "is drawing maze" << std::endl;
+        addedToGraphNode.emplace_back(Node(fromNode));
+
+        //while not all nodes are in mazeGraph
+        while(addedToGraphNode.size() != NUMBER_OF_CELL) {
+            //Choose a random node in mazeGraph
+            Node randomNode = getRandomNode(addedToGraphNode);
+            //Connect to a random neighbor node that is not in mazeGraph
+            std::vector<Node> neighbors = getUnvisitedNeighborNode(randomNode);
+            Node randomNeighbor = getRandomNode(neighbors);
+            //if there's no unvisited neighbor nodes -> skip this one;
+            if (randomNeighbor.getData() == Node::UNDEFINED) {
+                continue;
+            } else {
+//this shit is so suspicious
+                mazeGraph.addEdge(randomNode.getData(), randomNeighbor.getData());
+                //Add that neighbor to mazeGraph
+                addedToGraphNode.emplace_back(randomNeighbor);
+            }
+
+            draw(target);
+        }
+        mazeGraph.printGraph();
+    }
+}*/
 
 /**
  * To choose a random node from a set.
@@ -206,9 +237,13 @@ Graph Maze::getWeightedGraph() {
     return weightedGraph;
 }
 
+void Maze::draw(sf::RenderTarget &target, sf::RenderStates state) const {
+    for (int i = 0; i < addedToGraphNode.size(); i++) {
+        target.draw(addedToGraphNode[i]);
+    }
+    mazeGraph.draw(target);
 
-
-
+}
 
 
 

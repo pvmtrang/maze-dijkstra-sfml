@@ -25,7 +25,7 @@ private:
     
     int numberOfNode;
 
-    sf::Color color;
+    sf::Color color{};
 
     std::vector<sf::RectangleShape> coloredEdge;
 
