@@ -32,18 +32,21 @@ int main() {
     static const int SCALED_HEIGHT = Maze::HEIGHT * Node::SIZE_CELL;
 
     sf::RenderWindow window(sf::VideoMode(SCALED_WIDTH, SCALED_HEIGHT), "Mazzzze", sf::Style::Default);
-    window.setFramerateLimit(51);
+    window.setFramerateLimit(60);
 
     Maze maze;
-
-//    Maze::countMazeGenerated = 0;
-//    Graph g(30);
-
+    Dijkstra djk;
 
     while (window.isOpen()) {
         maze.generateMaze(window);
 
         maze.draw(window);
+
+        if (maze.isDone) {
+            window.setFramerateLimit(10);
+            djk.findShortestPath(maze.getWeightedGraph());
+            window.draw(djk);
+        }
 
         window.display();
         window.clear(sf::Color::Black);
@@ -54,8 +57,10 @@ int main() {
 
     std::cout << "finished";
 
-//    Dijkstra djk(maze.getWeightedGraph());
-//    djk.findShortestPath(0, 29);
+//    maze.generateWeightedGraph();
+
+    /*Dijkstra djk(maze.getWeightedGraph());
+    djk.findShortestPath(0, 29);*/
 
     return 0;
 }

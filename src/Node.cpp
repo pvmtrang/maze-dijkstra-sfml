@@ -9,12 +9,12 @@
 
 const int Node::UNDEFINED;  //this is the definition of a (static) const. *mindblow*
 
-Node::Node(int data) : data(data) {
+Node::Node(int data, sf::Color color) : data(data), color(color) {
     xCoord = data % Maze::WIDTH;
     yCoord = (data - xCoord) / Maze::WIDTH;
 
 //    hmmm i'm using int for float vector hmmmm
-    square.setFillColor(COLOR_NODE);
+    square.setFillColor(color);
     //??? /2
     square.setSize(sf::Vector2f(SIZE_NODE, SIZE_NODE));
     square.setPosition(sf::Vector2f(getXCoord() * SIZE_CELL + SIZE_BORDER,
@@ -22,10 +22,6 @@ Node::Node(int data) : data(data) {
 //    square.setOutlineThickness(1);
 //    square.setOutlineColor(sf::Color::Red);
 }
-
-//Node::Node(Node &other) {
-//    Node(other.getData());
-//}
 
 int Node::getData() {
     return data;

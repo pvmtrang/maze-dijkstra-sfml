@@ -13,8 +13,8 @@
 
 class Maze : public sf::Drawable {
 public:
-    static const int WIDTH = 6;
-    static const int HEIGHT = 5;
+    static const int WIDTH = 15;
+    static const int HEIGHT = 10;
     static const int NUMBER_OF_CELL = WIDTH * HEIGHT;
 
     Maze();
@@ -28,6 +28,8 @@ public:
     Graph getWeightedGraph();
 
     void draw(sf::RenderTarget& target, sf::RenderStates state = sf::RenderStates::Default) const override;
+
+    bool isDone;
 
 private:
     const sf::Color COLOR_MAZE_GRAPH{ sf::Color::Cyan};
@@ -50,6 +52,15 @@ private:
     bool isQualifiedForWeightedGraph(int node);
 
     int findNextQualifiedNode(int node);
+
+    //cant think of a better name =_=
+    std::vector<int> qualifiedNode;
+
+    void findAllQualifiedNode();
+
+    bool isWeightedGraphGenerated();
+
+    std::vector<int> countVisitPerNode;
 
 
 

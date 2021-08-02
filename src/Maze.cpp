@@ -9,16 +9,18 @@
 #include "Maze.hpp"
 
 //set value like this only work with 0
-Maze::Maze() : mazeGraph(NUMBER_OF_CELL), weightedGraph(NUMBER_OF_CELL) {
+Maze::Maze() : mazeGraph(NUMBER_OF_CELL), weightedGraph(NUMBER_OF_CELL), countVisitPerNode{0} {
     srand((int) time(0));
-//    countMazeGenerated = 0;
-
+    isDone = false;
 }
 
 /**
  * Using prim to generate maze
  * @param fromNode
  */
+ //how to improve this
+ //because of recursion, method with fromNode = 0 is called repeatedly for every frame loop
+ //the bigger it grows, the slower it gets
 void Maze::generateMaze( sf::RenderTarget& target, int fromNode) {
     //while not all nodes are in mazeGraph
     if (addedToGraphNode.size() < NUMBER_OF_CELL) {
@@ -31,15 +33,21 @@ void Maze::generateMaze( sf::RenderTarget& target, int fromNode) {
         if (!isInGraph(fromNode)) {
             addedToGraphNode.emplace_back(Node(fromNode));
         }
-
         //Choose a random node in mazeGraph
         Node randomNode = getRandomNode(addedToGraphNode);
+//        countVisitPerNode[randomNode.getData()] += 1;
+        /*if (countVisitPerNode[randomNode.getData()]) {
+
+        }*/
         //Connect to a random neighbor node that is not in mazeGraph
         std::vector<Node> neighbors = getUnvisitedNeighborNode(randomNode);
         Node randomNeighbor = getRandomNode(neighbors);
         //if there's no unvisited neighbor nodes -> skip this one;
         if (randomNeighbor.getData() == Node::UNDEFINED) {
 //            continue;
+//why cant???
+//            Node otherRandomNode = getRandomNode(addedToGraphNode);
+//            generateMaze(target, otherRandomNode.getData());
         } else {
 //this shit is so suspicious
             mazeGraph.addEdge(randomNode.getData(), randomNeighbor.getData());
@@ -51,6 +59,11 @@ void Maze::generateMaze( sf::RenderTarget& target, int fromNode) {
             generateMaze(target, randomNeighbor.getData());
 
         }
+    } else {
+        if (!isWeightedGraphGenerated()) {
+            generateWeightedGraph();
+        }
+
     }
 }
 
@@ -160,19 +173,23 @@ Graph Maze::getMazeGraph() {
     return mazeGraph;
 }
 
-//Chua nghi den viec them start va end node vao kieu gi
-//Or de mac dinh start la 0 va end la 29: 2 node nay luon qualified
-void Maze::generateWeightedGraph() {
-//1. find all possible qualified node
-    std::vector<int> qualifiedNode;
+void Maze::findAllQualifiedNode() {
     for (int i = 0; i < mazeGraph.getNumberOfNode(); i++) {
         if (isQualifiedForWeightedGraph(i)) {
             qualifiedNode.emplace_back(i);
         }
     }
-//2. generate the weighted graph
-//    weightedGraph = Graph(qualifiedNode.size());
+}
 
+
+
+//Chua nghi den viec them start va end node vao kieu gi
+//Or de mac dinh start la 0 va end la 29: 2 node nay luon qualified
+void Maze::generateWeightedGraph() {
+//1. find all possible qualified node
+//    std::vector<int> qualifiedNode;
+    findAllQualifiedNode();
+//2. generate the weighted graph
     for (int iQualifiedNode : qualifiedNode) {
         //loop through it's neighbor
         for (int iNeighbor : mazeGraph.getNeighborNodes(iQualifiedNode)) {
@@ -187,8 +204,9 @@ void Maze::generateWeightedGraph() {
             }
         }
     }
+    isDone = true;
 
-    weightedGraph.printGraph();
+//    weightedGraph.printGraph();
 }
 
 //this is like depth first search without backtracking
@@ -201,6 +219,7 @@ int Maze::findNextQualifiedNode(int node) {
     }
     return findNextQualifiedNode(firstNeighbor);
 }
+
 
 /**
  * A node addable to a weighted graph can be a dead-end, a turn or a junction, except for the start and end node.
@@ -243,7 +262,23 @@ void Maze::draw(sf::RenderTarget &target, sf::RenderStates state) const {
     }
     mazeGraph.draw(target);
 
+    for (int i = 0; i < qualifiedNode.size(); i++) {
+        target.draw(Node(qualifiedNode[i], sf::Color::Cyan));
+    }
+
 }
+
+bool Maze::isWeightedGraphGenerated() {
+    for (int i = 0; i < weightedGraph.getNumberOfNode(); i++) {
+//        std::vector<int> neighbor = weightedGraph.getNeighborNodes(i);
+//because every list has a default element which is itself
+        if (weightedGraph.getNeighborNodes(i).size() > 1) {
+            return true;
+        }
+    }
+    return false;
+}
+
 
 
 

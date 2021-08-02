@@ -33,7 +33,7 @@ private:
 
 public:
     //van se maintain numberOfNode by size of the screen
-    Graph(int numberOfNode, sf::Color color = sf::Color::Blue);
+    Graph(int numberOfNode = 0, sf::Color color = sf::Color::Blue);
 
     virtual ~Graph();
 

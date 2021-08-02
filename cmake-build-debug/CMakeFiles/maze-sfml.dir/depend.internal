@@ -4,6 +4,7 @@
 CMakeFiles/maze-sfml.dir/src/Dijkstra.cpp.obj
  ../headers/Dijkstra.hpp
  ../headers/Graph.hpp
+ ../headers/Maze.hpp
  ../headers/Node.hpp
  C:/SFML/include/SFML/Config.hpp
  C:/SFML/include/SFML/Graphics.hpp

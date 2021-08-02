@@ -76,8 +76,6 @@ void Graph::addToColoredEdge(Node node1, Node node2) {
     }
     int width = (node2.getXCoord() + 1 - node1.getXCoord()) * Node::SIZE_CELL - 2 * Node::SIZE_BORDER;
     int height = (node2.getYCoord() + 1 - node1.getYCoord()) * Node::SIZE_CELL - 2 * Node::SIZE_BORDER;
-    /*int width = 50;
-    int height = 30;*/
 
     sf::RectangleShape rectangle(sf::Vector2f(width, height));
 
@@ -85,11 +83,7 @@ void Graph::addToColoredEdge(Node node1, Node node2) {
     rectangle.setPosition(sf::Vector2f(node1.getXCoord() * Node::SIZE_CELL + Node::SIZE_BORDER,
                                        node1.getYCoord() * Node::SIZE_CELL + Node::SIZE_BORDER));
 
-//    rectangle.setPosition(node1.getShape().getPosition());
     rectangle.setFillColor(color);
-//    hmmm how to change this shit color not by magic color var
-//    rectangle.setOutlineColor(sf::Color::Red);
-//    rectangle.setOutlineThickness(Node::SIZE_BORDER);
 
     coloredEdge.emplace_back(rectangle);
 }

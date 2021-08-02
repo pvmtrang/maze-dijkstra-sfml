@@ -11,11 +11,13 @@
 class Node : public sf::Drawable {
 private:
     int data;
-//    according to sfml coordinate, xy on top left, x_ y|
+    //by sfml coordinate, xy on top left, x_ y|
     int xCoord;
     int yCoord;
 
     sf::RectangleShape square;
+
+    sf::Color color;
 
 public:
     static const int UNDEFINED = -1;    ; //This is just the declaration, the def is in cpp
@@ -27,7 +29,7 @@ public:
 //    const sf::Color COLOR_BORDER {sf::Color::Red};
 
 
-    Node(int data = UNDEFINED);
+    Node(int data = UNDEFINED, sf::Color color = sf::Color::White);
 
 //    Node(Node &other);
 

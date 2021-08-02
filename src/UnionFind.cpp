@@ -53,7 +53,7 @@ void UnionFind::printComponent() {
     while (currentNode < numberOfNode) {
         int isIncluded = false;
         for (int i = 0; i < output.size(); i++) {
-            //if the currentNode belong to any component -> add
+            //if the currentNodeList belong to any component -> add
             if (isConnected(currentNode, output[i][0])) {
                 output[i].push_back(currentNode);
                 isIncluded = true;
