@@ -18,16 +18,22 @@
  * [1]: Node(1) -> neighbor -> nodes -> in -> reverse -> inserted -> order
  * [2]: Node(2) -> neighbor -> nodes -> in -> reverse -> inserted -> order
  */
-class Graph {
+class Graph : public sf::Drawable {
 private:
 //    adjacency list
     std::vector<std::forward_list<Node>> graph;
     
     int numberOfNode;
 
+    sf::Color color;
+
+    std::vector<sf::RectangleShape> coloredEdge;
+
+    void addToColoredEdge(Node node1, Node node2);
+
 public:
     //van se maintain numberOfNode by size of the screen
-    Graph(int numberOfNode);
+    Graph(int numberOfNode, sf::Color color = sf::Color::Blue);
 
     virtual ~Graph();
 
@@ -42,6 +48,9 @@ public:
     int getNumberOfNode() const;
 
     std::vector<int> getNeighborNodes(int node);
+
+    void draw(sf::RenderTarget& target, sf::RenderStates state = sf::RenderStates::Default) const override;
+
 
 };
 

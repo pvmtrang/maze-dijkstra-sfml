@@ -5,7 +5,6 @@
 #include <iostream>
 #include "Node.hpp"
 #include "Maze.hpp"
-#include "Painter.hpp"
 #include <SFML/Graphics.hpp>
 
 const int Node::UNDEFINED;  //this is the definition of a (static) const. *mindblow*
@@ -15,12 +14,12 @@ Node::Node(int data) : data(data) {
     yCoord = (data - xCoord) / Maze::WIDTH;
 
 //    hmmm i'm using int for float vector hmmmm
-    square.setFillColor(sf::Color::White);
-    square.setSize(sf::Vector2f(NODE_SIZE, NODE_SIZE));
-    square.setPosition(sf::Vector2f(getXCoord() * NODE_SIZE,
-                                    getYCoord() * NODE_SIZE));
-    square.setOutlineThickness(NODE_BORDER_SIZE);
-    square.setOutlineColor(sf::Color::Red);
+    square.setFillColor(COLOR_NODE);
+    square.setSize(sf::Vector2f(SIZE_NODE, SIZE_NODE));
+    square.setPosition(sf::Vector2f(getXCoord() * SIZE_NODE,
+                                    getYCoord() * SIZE_NODE));
+    square.setOutlineThickness(SIZE_BORDER);
+    square.setOutlineColor(COLOR_BORDER);
 }
 
 int Node::getData() const {

@@ -7,7 +7,7 @@
 #include "Graph.hpp"
 
 
-Graph::Graph(int numberOfNode) : numberOfNode(numberOfNode) {
+Graph::Graph(int numberOfNode, sf::Color color) : numberOfNode(numberOfNode), color(color) {
     for (int i = 0; i < numberOfNode; i++) {
         graph.emplace_back(std::forward_list<Node>());
         graph[i].emplace_front(Node(i));
@@ -28,7 +28,6 @@ void Graph::printGraph() {
 }
 
 /** Clear the adjacency list.
- *
  */
 void Graph::clearGraph() {
     for (int i = 0; i < numberOfNode; i++) {
@@ -62,13 +61,25 @@ void Graph::addEdge(int node1, int node2) {
         } else {
             graph[node1].emplace_after(graph[node1].begin(), newNode2);
             graph[node2].emplace_after(graph[node2].begin(), newNode1);
+            addToColoredEdge(newNode1, newNode2);
         }
-
-
     }
-
-
 }
+
+void Graph::addToColoredEdge(Node node1, Node node2) {
+    int width = (node2.getXCoord() + 1 - node1.getXCoord()) * Node::SIZE_NODE;
+    int height = (node2.getYCoord() + 1 - node1.getYCoord()) * Node::SIZE_NODE;
+
+    sf::RectangleShape rectangle(sf::Vector2f(width, height));
+
+    rectangle.setPosition(node1.getXCoord(), node1.getYCoord());
+    rectangle.setFillColor(color);
+//    hmmm how to change this shit color not by magic color var
+    rectangle.setOutlineColor(sf::Color::Cyan);
+
+    coloredEdge.emplace_back(rectangle);
+}
+
 
 /**
  * Calculate the distance between two nodes.
@@ -115,6 +126,16 @@ std::vector<int> Graph::getNeighborNodes(int node) {
 int Graph::getNumberOfNode() const {
     return numberOfNode;
 }
+
+
+void Graph::draw(sf::RenderTarget &target, sf::RenderStates state) const {
+    for (int i = 0; i < coloredEdge.size(); i++) {
+        target.draw(coloredEdge[i]);
+    }
+}
+
+
+
 
 
 

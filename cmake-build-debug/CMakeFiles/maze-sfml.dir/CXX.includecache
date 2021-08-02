@@ -32,12 +32,6 @@ SFML/Graphics.hpp
 SFML/Graphics.hpp
 -
 
-../headers/Painter.hpp
-SFML/Graphics.hpp
--
-Maze.hpp
-../headers/Maze.hpp
-
 ../headers/UnionFind.hpp
 vector
 -
@@ -727,8 +721,6 @@ Node.hpp
 F:/edoc/c--/maze-sfml/src/Node.hpp
 Maze.hpp
 F:/edoc/c--/maze-sfml/src/Maze.hpp
-Painter.hpp
-F:/edoc/c--/maze-sfml/src/Painter.hpp
 string.h
 -
 algorithm

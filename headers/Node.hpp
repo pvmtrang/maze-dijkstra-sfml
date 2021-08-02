@@ -10,6 +10,8 @@
 
 class Node : public sf::Drawable {
 private:
+
+
     int data;
 //    according to sfml coordinate, xy on top left, x_ y|
     int xCoord;
@@ -19,8 +21,12 @@ private:
 
 public:
     static const int UNDEFINED = -1;    ; //This is just the declaration, the def is in cpp
-    static const int NODE_SIZE = 50;
-    static const int NODE_BORDER_SIZE = -10;
+    static const int SIZE_NODE = 50;
+    static const int SIZE_BORDER= -10;
+
+    const sf::Color COLOR_NODE = sf::Color::White;
+    const sf::Color COLOR_BORDER = sf::Color::Red;
+
 
     Node(int data);
 
@@ -35,9 +41,9 @@ public:
 
     bool operator!=(const Node &rhs) const;
 
-    sf::RectangleShape dgetShape();
+    sf::RectangleShape getShape();
 
-    void draw(sf::RenderTarget& target, sf::RenderStates state) const override;
+    void draw(sf::RenderTarget& target, sf::RenderStates state = sf::RenderStates::Default) const override;
 
 };
 

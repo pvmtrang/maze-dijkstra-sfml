@@ -5,7 +5,6 @@
 #include "UnionFind.hpp"
 #include "Node.hpp"
 #include "Maze.hpp"
-#include "Painter.hpp"
 #include <string.h>
 #include <algorithm>
 
@@ -29,26 +28,26 @@ void takeInput(sf::RenderWindow &window) {
 }
 
 int main() {
-    static const int SCALED_WIDTH = Maze::WIDTH * Node::NODE_SIZE;
-    static const int SCALED_HEIGHT = Maze::HEIGHT * Node::NODE_SIZE;
+    static const int SCALED_WIDTH = Maze::WIDTH * Node::SIZE_NODE;
+    static const int SCALED_HEIGHT = Maze::HEIGHT * Node::SIZE_NODE;
 
-    std::vector<Node> vec;
+    std::vector<sf::RectangleShape> vec;
     int tmp = 0;
 
     sf::RenderWindow window(sf::VideoMode(SCALED_WIDTH, SCALED_HEIGHT), "Mazzzze", sf::Style::Default);
-    window.setFramerateLimit(10);
+    window.setFramerateLimit(60);
+
+    Graph g(200);
 
     while (window.isOpen()) {
-        if (tmp < 10) {
-            vec.emplace_back(Node(tmp));
+        if (tmp < 150) {
+            g.addEdge(tmp, tmp + 3);
             tmp += 1;
-        } else {
-            tmp = 0;
-            vec.clear();
         }
-        for (int i = 0; i < vec.size(); i++) {
-            window.draw(vec[i]);
-        }
+
+        g.draw(window);
+
+
         window.display();
         window.clear(sf::Color::Black);
         takeInput(window);
