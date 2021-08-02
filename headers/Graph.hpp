@@ -20,8 +20,6 @@
  */
 class Graph {
 private:
-//    adjacency matrix
-//    std::vector<std::vector<int>> mazeGraph;
 //    adjacency list
     std::vector<std::forward_list<Node>> graph;
     

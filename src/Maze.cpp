@@ -8,12 +8,12 @@
 #include <algorithm>
 #include "Maze.hpp"
 
-const int WIDTH = 6;
-const int HEIGHT = 5;
-const int NUMBER_OF_CELL = WIDTH * HEIGHT;
+static const int WIDTH = 6;
+static const int HEIGHT = 5;
+//const int NUMBER_OF_CELL = WIDTH * HEIGHT;
 
 //set value like this only work with 0
-Maze::Maze() : mazeGraph(NUMBER_OF_CELL), weightedGraph(NUMBER_OF_CELL){
+Maze::Maze() : mazeGraph(NUMBER_OF_CELL), weightedGraph(NUMBER_OF_CELL) {
     srand((int) time(0));
 
 }
@@ -28,6 +28,7 @@ void Maze::generateMaze(int fromNode) {
 
 
     addedToGraphNode.emplace_back(Node(fromNode));
+//    Node(fromNode).render(Painter::getWindow(), sf::Color::White);
 
     //while not all nodes are in mazeGraph
     while(addedToGraphNode.size() != NUMBER_OF_CELL) {
@@ -124,11 +125,6 @@ bool Maze::isInGraph(Node n) {
     return std::count(addedToGraphNode.begin(), addedToGraphNode.end(), n);
 }
 
-void Maze::printMaze() {
-    std::cout << "havent figured out yet" << std::endl;
-}
-
-
 Graph Maze::getMazeGraph() {
     return mazeGraph;
 }
@@ -162,7 +158,6 @@ void Maze::generateWeightedGraph() {
     }
 
     weightedGraph.printGraph();
-//    return weightedGraph;
 }
 
 //this is like depth first search without backtracking
@@ -210,6 +205,8 @@ Graph Maze::getWeightedGraph() {
 //    generateWeightedGraph();
     return weightedGraph;
 }
+
+
 
 
 

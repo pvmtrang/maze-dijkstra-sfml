@@ -9,6 +9,7 @@
 #include <vector>
 #include <Node.hpp>
 #include <Graph.hpp>
+#include <SFML/Graphics.hpp>
 
 class Maze {
 public:
@@ -25,6 +26,7 @@ public:
     void generateWeightedGraph();
 
     Graph getWeightedGraph();
+
 
 private:
     Graph mazeGraph;
@@ -45,7 +47,7 @@ private:
 
     int findNextQualifiedNode(int node);
 
-    void printMaze();
+
 
 };
 

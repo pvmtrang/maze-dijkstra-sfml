@@ -1,86 +1,69 @@
 #include <iostream>
-//#include <SFML/Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <Graph.hpp>
 #include <Dijkstra.hpp>
 #include "UnionFind.hpp"
 #include "Node.hpp"
 #include "Maze.hpp"
+#include "Painter.hpp"
 #include <string.h>
 #include <algorithm>
 
-int main() {
-//    sf::Window window(sf::VideoMode(800, 600), "bla");
+void takeInput(sf::RenderWindow &window) {
+    sf::Event event{};
 
-    /*static int WIDTH = 10;
-    static int HEIGHT = 5;
-
-    Graph g(7);
-    g.addEdge(0, 1);
-    g.addEdge(0, 2);
-    g.addEdge(1, 3);
-    g.addEdge(2, 3);
-    g.addEdge(3, 5);
-    g.addEdge(3, 4);
-    g.addEdge(4, 5);
-    g.addEdge(5, 6);
-    g.addEdge(4, 6);
-    g.addEdge(0, 2);
-
-    g.printGraph();
-
-
-    Dijkstra djk(g);
-
-    if (djk.findShortestPath(0, 6)) {
-        std::vector<int>output = djk.getFinalPath();
-        std::cout << "final path: ";
-        for(int i : output) {
-            std::cout << i << " ";
+    while (window.pollEvent(event)) {
+        // Window closed
+        switch(event.type) {
+            case sf::Event::Closed:
+                window.close();
+                break;
+            case sf::Event::KeyPressed:
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+                    window.close();
+                }
+            default:
+                break;
         }
-        std::cout << std::endl << "path cost: " << djk.getTotalPathCost();
-    } else {
-        std::cout << "no path found";
-    }*/
-
-    /*UnionFind u(10);
-    u.connect(9, 7);
-    u.connect(7, 3);
-    u.connect(8, 0);
-    u.connect(7, 0);
-    u.connect(2, 5);
-    u.connect(1, 5);
-    u.connect(5, 6);
-    u.connect(4,5);
-
-//    u.connect(9, 1);
-//    std::cout << u.isConnected(9, 1);
-    u.printComponent();*/
-
-    Maze maze;
-    maze.generateMaze();
-    std::cout << "weighted graph\n";
-    maze.generateWeightedGraph();
-
-    Dijkstra djk(maze.getWeightedGraph());
-    djk.findShortestPath(0, 29);
-
-//    std::cout << (-5) % 5;
-    /*std::vector<int> tmp;
-    for (int i = 0; i < 6; i++) {
-        tmp.emplace_back(i);
     }
+}
 
-    std::swap(tmp[2], tmp[tmp.size() - 1]);
+int main() {
+    static const int SCALED_WIDTH = Maze::WIDTH * Node::NODE_SIZE;
+    static const int SCALED_HEIGHT = Maze::HEIGHT * Node::NODE_SIZE;
 
-    tmp.pop_back();
+    std::vector<Node> vec;
+    int tmp = 0;
 
-    for (int i = 0; i < tmp.size(); i++) {
-        std::cout << tmp[i] << " ";
-    }*/
+    sf::RenderWindow window(sf::VideoMode(SCALED_WIDTH, SCALED_HEIGHT), "Mazzzze", sf::Style::Default);
+    window.setFramerateLimit(10);
 
-    /*std::vector<Node> tmp {Node(1), Node(2), Node(3), Node(2), Node(5), Node(4), Node(2)};
-    int randomIndex = rand() % tmp.size();
-    Node randomNode = tmp[randomIndex];
-    std::cout << randomNode.getData();*/
+    while (window.isOpen()) {
+        if (tmp < 10) {
+            vec.emplace_back(Node(tmp));
+            tmp += 1;
+        } else {
+            tmp = 0;
+            vec.clear();
+        }
+        for (int i = 0; i < vec.size(); i++) {
+            window.draw(vec[i]);
+        }
+        window.display();
+        window.clear(sf::Color::Black);
+        takeInput(window);
+
+
+    }
+    window.setFramerateLimit(50);
+
+
+
+
+
+
+//    Dijkstra djk(maze.getWeightedGraph());
+//    djk.findShortestPath(0, 29);
+
     return 0;
 }
