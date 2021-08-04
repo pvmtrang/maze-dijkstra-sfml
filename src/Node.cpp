@@ -29,6 +29,7 @@ Node::Node(int data, sf::Color color) : data(data), color(color) {
     square.setSize(sf::Vector2f(SIZE_NODE, SIZE_NODE));
     square.setPosition(sf::Vector2f(getXCoord() * SIZE_CELL + SIZE_BORDER,
                                     getYCoord() * SIZE_CELL + SIZE_BORDER));
+    //1 is for the square outline
     square.setOutlineThickness(1);
     square.setOutlineColor(sf::Color::Magenta);
 }

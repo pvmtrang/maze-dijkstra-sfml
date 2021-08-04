@@ -31,25 +31,17 @@ int main() {
     static const int SCALED_WIDTH = Maze::WIDTH * Node::SIZE_CELL;
     static const int SCALED_HEIGHT = Maze::HEIGHT * Node::SIZE_CELL;
 
-    static const int SPEED_HIGH = 60;
+    static const int SPEED_HIGH = 70;
     static const int SPEED_LOW = 10;
 
-    sf::RenderWindow window(sf::VideoMode(SCALED_WIDTH, SCALED_HEIGHT), "Mazzzze", sf::Style::Default);
+    sf::RenderWindow window(sf::VideoMode(SCALED_WIDTH, SCALED_HEIGHT),
+                            "Mazzzzzzzze", sf::Style::Default);
     window.setFramerateLimit(SPEED_HIGH);
 
     Maze maze;
     Dijkstra djk;
 
-    sf::Font font;
-    font.loadFromFile("assets/Abel-Regular.ttf");
-    sf::Text text;
-    text.setFont(font);
-    text.setCharacterSize(20);
-    text.setFillColor(sf::Color::White);
-    text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-
-
-    while (window.isOpen()) {
+        while (window.isOpen()) {
         maze.generateMaze(window);
 
         maze.draw(window);
@@ -60,7 +52,6 @@ int main() {
             window.draw(djk);
         }
 
-//        window.draw(text);
         window.display();
         window.clear(sf::Color::Black);
         takeInput(window);
@@ -69,11 +60,6 @@ int main() {
     }
 
     std::cout << "finished";
-
-//    maze.generateWeightedGraph();
-
-    /*Dijkstra djk(maze.getWeightedGraph());
-    djk.findShortestPath(0, 29);*/
 
     return 0;
 }

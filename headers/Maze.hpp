@@ -5,7 +5,6 @@
 #ifndef MAZE_SFML_MAZE_HPP
 #define MAZE_SFML_MAZE_HPP
 
-
 #include <vector>
 #include <Node.hpp>
 #include <Graph.hpp>
@@ -13,8 +12,8 @@
 
 class Maze : public sf::Drawable {
 public:
-    static const int WIDTH = 5;
-    static const int HEIGHT = 4;
+    static const int WIDTH = 12;
+    static const int HEIGHT = 8;
     static const int NUMBER_OF_CELL = WIDTH * HEIGHT;
 
     Maze();

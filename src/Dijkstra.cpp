@@ -14,11 +14,17 @@ Dijkstra::Dijkstra() {
     isGraphSet = false;
     isFound = false;
 
-//    finalPathGraph(0);
+    font.loadFromFile("assets/Abel-Regular.ttf");
+
 }
 
 //checked
 Dijkstra::Dijkstra(const Graph &graph) {
+    totalPathCost = INFINITY;
+    currentNode = Node::UNDEFINED;
+
+    font.loadFromFile("assets/Abel-Regular.ttf");
+
     setGraph(graph);
     /*totalPathCost = INFINITY;
     for (int i = 0; i < graph.getNumberOfNode(); i++) {
@@ -37,19 +43,17 @@ void Dijkstra::setGraph(const Graph &graph) {
 
     std::cout << "graph is set" << std::endl;
 
-    totalPathCost = INFINITY;
-
-    currentNode = Node::UNDEFINED;
-
     for (int i = 0; i < graph.getNumberOfNode(); i++) {
         open.emplace_back(true);
         closed.emplace_back(false);
         previous.emplace_back(Node::UNDEFINED);
         distance.emplace_back(INFINITY);
+
+        distanceText.emplace_back(sf::Text("", font));
     }
 
-    finalPathGraph = Graph(graph.getNumberOfNode(), sf::Color::Green);
-    tmp = Graph(graph.getNumberOfNode(), sf::Color::Red);
+    visitedPathGraph = Graph(graph.getNumberOfNode(), sf::Color::Green);
+    finalPathGraph = Graph(graph.getNumberOfNode(), sf::Color::Red);
 }
 
 /**
@@ -65,27 +69,17 @@ void Dijkstra::findShortestPath(Graph graph, int fromNode, int toNode) {
 
         //for rendering
         previous[fromNode] = fromNode;
+        updateDistanceText(fromNode, std::to_string(0));
     }
     if (!isFound) {
         //if - while
         if(isOpenEmpty()) {
-
-//            std::cout << "check djk open empty" << std::endl;
-//            int currentNode = findMinDistanceNode();
             currentNode = findMinDistanceNode();
             std::cout << "NODE " << currentNode << " DISTANCE TO 0: " << distance[currentNode] << std::endl;
-//            std::cout << "from previous node is " << previous[currentNode] << std::endl;
-
 
             //for rendering
-//            currentNodeList.clear();
-//            currentNodeList.emplace_back(currentNode);
-//            currentNodeToRender = currentNode;
+            visitedPathGraph.addEdge(currentNode, previous[currentNode]);
 
-            //for rendering
-            finalPathGraph.addEdge(currentNode, previous[currentNode]);
-
-//            std::cout << "CURRENT NODEEEE " << currentNode << std::endl;
             //when there's still open neighbor
             if (currentNode != Node::UNDEFINED) {
                 if (currentNode == toNode) {
@@ -97,7 +91,7 @@ void Dijkstra::findShortestPath(Graph graph, int fromNode, int toNode) {
                     return;
                 }
 
-                //remove from open
+                //move node from open to closed
                 open[currentNode] = false;
                 closed[currentNode] = true;
 
@@ -110,9 +104,7 @@ void Dijkstra::findShortestPath(Graph graph, int fromNode, int toNode) {
                             distance[n] = tmp;
                             previous[n] = currentNode;
 
-
-
-//                            currentNodeList.emplace_back(n);
+                            updateDistanceText(n, std::to_string(tmp));
                         }
                     }
                 }
@@ -120,6 +112,20 @@ void Dijkstra::findShortestPath(Graph graph, int fromNode, int toNode) {
         }
     }
 }
+
+
+void Dijkstra::updateDistanceText(int node, std::string newString) {
+    Node n(node);
+
+    sf::Text text(newString, font);
+    text.setCharacterSize(Node::SIZE_NODE);
+    text.setFillColor(sf::Color::Black);
+    text.setPosition(n.getXCoord() * Node::SIZE_CELL + Node::SIZE_BORDER,
+                     n.getYCoord() * Node::SIZE_CELL + Node::SIZE_BORDER);
+
+    distanceText[node] = text;
+}
+
 
 /**
  * Check if there's still an open node left
@@ -142,7 +148,7 @@ void Dijkstra::traceBackFinalPath(int currentNode) {
 //        std::cout << "current: " << currentNodeList << " ";
         int prev = previous[currentNode];
 
-        tmp.addEdge(prev, currentNode);
+        finalPathGraph.addEdge(prev, currentNode);
 
         currentNode = prev;
 
@@ -151,7 +157,6 @@ void Dijkstra::traceBackFinalPath(int currentNode) {
     //add the starting node also
     finalPath.emplace_back(currentNode);
 
-//    drawFinalPath();
 
     isFound = true;
 
@@ -194,18 +199,20 @@ const std::vector<int> &Dijkstra::getFinalPath() const {
 void Dijkstra::draw(sf::RenderTarget &target, sf::RenderStates state) const {
 //    std::cout << "drawing djk graph" << std::endl;
 
-    finalPathGraph.draw(target, state);
+    visitedPathGraph.draw(target, state);
 
     Node(currentNode, sf::Color::Red).draw(target, state);
 
-    /*for (int i = 0; i < currentNodeList.size(); i++) {
-//        std::cout << "IS THIS FUCKING CURRENT NODE " << i << "BEING DRAWN?" << std::endl;
-        Node(currentNodeList[i], sf::Color::Red).draw(target, state);
-    }*/
+    finalPathGraph.draw(target, state);
 
-    tmp.draw(target, state);
+    for (int i = 0; i < distanceText.size(); i++) {
+        target.draw(distanceText[i]);
+    }
 
 }
+
+
+
 
 
 

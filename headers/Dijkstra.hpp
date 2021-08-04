@@ -19,11 +19,14 @@ private:
 
     Graph graph;
 
+    Graph visitedPathGraph;
+
     Graph finalPathGraph;
 
-    Graph tmp;
-
     int totalPathCost;
+
+    int currentNode;
+
 //    use vector because array size must be given in declaration
     std::vector<bool> open;
     std::vector<int> distance;
@@ -31,7 +34,12 @@ private:
     std::vector<int> previous;
     std::vector<int> finalPath;
 
-    int currentNode;
+    sf::Font font;
+    std::vector<sf::Text> distanceText;
+
+
+    void updateDistanceText(int node, std::string newString);
+
 
     bool isOpenEmpty();
 
@@ -43,13 +51,11 @@ private:
 
 //    void drawFinalPath();
 
-    void draw(sf::RenderTarget& target, sf::RenderStates state = sf::RenderStates::Default) const override;
-
     bool isGraphSet;
 
 
 public:
-//    explicit is for prevent constructor from implicit convert param type
+//    explicit is to prevent constructor from implicit convert param type
     explicit Dijkstra(const Graph &graph);
 
     Dijkstra();
@@ -64,6 +70,8 @@ public:
     [[nodiscard]] const std::vector<int> &getFinalPath() const;
 
     void printGraph();
+
+    void draw(sf::RenderTarget& target, sf::RenderStates state = sf::RenderStates::Default) const override;
 
 };
 
