@@ -47,9 +47,6 @@ int Node::getData() {
     text.setString(newText);
 }*/
 
-void Node::setData(int data) {
-    Node::data = data;
-}
 
 int Node::getXCoord() const {
     return xCoord;

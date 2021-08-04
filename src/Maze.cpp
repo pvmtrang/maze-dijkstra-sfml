@@ -30,7 +30,7 @@ void Maze::generateMaze( sf::RenderTarget& target, int fromNode) {
         //that fromNode is already added in the vector
         //because fromNode is randomly choose from the neighbor set
         //i feel like my above explanation is wrong somewhere but i'm in a hurry so whatever
-        if (!isInGraph(fromNode)) {
+        if (!isInGraph(Node(fromNode))) {
             addedToGraphNode.emplace_back(Node(fromNode));
         }
         //Choose a random node in mazeGraph

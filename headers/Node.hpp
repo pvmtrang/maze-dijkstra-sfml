@@ -38,13 +38,10 @@ public:
 
     explicit Node(int data = UNDEFINED, sf::Color color = sf::Color::White);
 
-//    Node(Node &other);
 
     int getData();
 
 //    void setText(std::string newText);
-
-    void setData(int data);
 
     int getXCoord() const;
 

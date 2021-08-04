@@ -53,10 +53,10 @@ void Graph::addEdge(int node1, int node2) {
     } else {
         Node newNode1(node1);
         Node newNode2(node2);
-        if (std::count(graph[node1].begin(), graph[node1].end(), node2)) {
+        if (std::count(graph[node1].begin(), graph[node1].end(), newNode2)) {
             std::cerr << "Node " << node1 << " is already connected to node " << node2 << std::endl;
         }
-        else if (std::count(graph[node2].begin(), graph[node2].end(), node1)) {
+        else if (std::count(graph[node2].begin(), graph[node2].end(), newNode1)) {
             std::cerr << "Node " << node2 << " is already connected to node " << node1 << std::endl;
         } else {
             graph[node1].emplace_after(graph[node1].begin(), newNode2);
@@ -122,7 +122,8 @@ int Graph::getDistance(int node1, int node2) {
 std::vector<int> Graph::getNeighborNodes(int node) {
     std::vector<int>output;
     for (Node &n : graph[node]) {
-        if (n == node) {
+        // :)
+        if (n.getData() == node) {
             continue;
         }
         output.emplace_back(n.getData());

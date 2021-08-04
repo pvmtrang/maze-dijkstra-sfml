@@ -6,12 +6,6 @@
 
 #IncludeRegexTransform: 
 
-../headers/Dijkstra.hpp
-Graph.hpp
-../headers/Graph.hpp
-Maze.hpp
-../headers/Maze.hpp
-
 ../headers/Graph.hpp
 vector
 -
@@ -20,22 +14,8 @@ forward_list
 Node.hpp
 ../headers/Node.hpp
 
-../headers/Maze.hpp
-vector
--
-Node.hpp
--
-Graph.hpp
--
-SFML/Graphics.hpp
--
-
 ../headers/Node.hpp
 SFML/Graphics.hpp
--
-
-../headers/UnionFind.hpp
-vector
 -
 
 C:/SFML/include/SFML/Config.hpp
@@ -708,16 +688,6 @@ SFML/Config.hpp
 
 C:/SFML/include/SFML/Window/WindowStyle.hpp
 
-F:/edoc/c--/maze-sfml/src/Dijkstra.cpp
-iostream
--
-algorithm
--
-Dijkstra.hpp
-F:/edoc/c--/maze-sfml/src/Dijkstra.hpp
-Graph.hpp
-F:/edoc/c--/maze-sfml/src/Graph.hpp
-
 F:/edoc/c--/maze-sfml/src/Graph.cpp
 iostream
 -
@@ -725,44 +695,4 @@ algorithm
 -
 Graph.hpp
 F:/edoc/c--/maze-sfml/src/Graph.hpp
-
-F:/edoc/c--/maze-sfml/src/Maze.cpp
-cstdlib
--
-ctime
--
-iostream
--
-algorithm
--
-Maze.hpp
-F:/edoc/c--/maze-sfml/src/Maze.hpp
-
-F:/edoc/c--/maze-sfml/src/Node.cpp
-iostream
--
-Node.hpp
-F:/edoc/c--/maze-sfml/src/Node.hpp
-Maze.hpp
-F:/edoc/c--/maze-sfml/src/Maze.hpp
-
-F:/edoc/c--/maze-sfml/src/main.cpp
-iostream
--
-SFML/Graphics.hpp
--
-Graph.hpp
--
-Dijkstra.hpp
--
-UnionFind.hpp
-F:/edoc/c--/maze-sfml/src/UnionFind.hpp
-Node.hpp
-F:/edoc/c--/maze-sfml/src/Node.hpp
-Maze.hpp
-F:/edoc/c--/maze-sfml/src/Maze.hpp
-string.h
--
-algorithm
--
 
