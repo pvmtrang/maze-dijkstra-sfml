@@ -31,11 +31,23 @@ int main() {
     static const int SCALED_WIDTH = Maze::WIDTH * Node::SIZE_CELL;
     static const int SCALED_HEIGHT = Maze::HEIGHT * Node::SIZE_CELL;
 
+    static const int SPEED_HIGH = 60;
+    static const int SPEED_LOW = 10;
+
     sf::RenderWindow window(sf::VideoMode(SCALED_WIDTH, SCALED_HEIGHT), "Mazzzze", sf::Style::Default);
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(SPEED_HIGH);
 
     Maze maze;
     Dijkstra djk;
+
+    sf::Font font;
+    font.loadFromFile("assets/Abel-Regular.ttf");
+    sf::Text text;
+    text.setFont(font);
+    text.setCharacterSize(20);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+
 
     while (window.isOpen()) {
         maze.generateMaze(window);
@@ -43,11 +55,12 @@ int main() {
         maze.draw(window);
 
         if (maze.isDone) {
-            window.setFramerateLimit(10);
+            window.setFramerateLimit(SPEED_LOW);
             djk.findShortestPath(maze.getWeightedGraph());
             window.draw(djk);
         }
 
+//        window.draw(text);
         window.display();
         window.clear(sf::Color::Black);
         takeInput(window);

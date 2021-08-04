@@ -39,6 +39,8 @@ void Dijkstra::setGraph(const Graph &graph) {
 
     totalPathCost = INFINITY;
 
+    currentNode = Node::UNDEFINED;
+
     for (int i = 0; i < graph.getNumberOfNode(); i++) {
         open.emplace_back(true);
         closed.emplace_back(false);
@@ -47,30 +49,43 @@ void Dijkstra::setGraph(const Graph &graph) {
     }
 
     finalPathGraph = Graph(graph.getNumberOfNode(), sf::Color::Green);
+    tmp = Graph(graph.getNumberOfNode(), sf::Color::Red);
 }
 
 /**
- *Print there is a path from fromNode to toNode.
- * Pretend that there's no number been skipped -> no check if it's in the list
- * @param fromNode
- * @param toNode
+ * Find the shortest path (if there's one) in graph between 2 nodes
+ * @param graph: demonstrate better if it's weighted graph. Works like BFS with unweighted maze graph.
+ * @param fromNode: node 0 default
+ * @param toNode: the last node in map defaul
  */
 void Dijkstra::findShortestPath(Graph graph, int fromNode, int toNode) {
     if (!isGraphSet) {
         setGraph(graph);
+        distance[fromNode] = 0;
+
+        //for rendering
+        previous[fromNode] = fromNode;
     }
     if (!isFound) {
         //if - while
         if(isOpenEmpty()) {
-            distance[fromNode] = 0;
-            std::cout << "check djk open empty" << std::endl;
-            int currentNode = findMinDistanceNode();
-            currentNodeList.clear();
-            currentNodeList.emplace_back(currentNode);
+
+//            std::cout << "check djk open empty" << std::endl;
+//            int currentNode = findMinDistanceNode();
+            currentNode = findMinDistanceNode();
+            std::cout << "NODE " << currentNode << " DISTANCE TO 0: " << distance[currentNode] << std::endl;
+//            std::cout << "from previous node is " << previous[currentNode] << std::endl;
 
 
+            //for rendering
+//            currentNodeList.clear();
+//            currentNodeList.emplace_back(currentNode);
+//            currentNodeToRender = currentNode;
 
-            std::cout << "CURRENT NODEEEE " << currentNode << std::endl;
+            //for rendering
+            finalPathGraph.addEdge(currentNode, previous[currentNode]);
+
+//            std::cout << "CURRENT NODEEEE " << currentNode << std::endl;
             //when there's still open neighbor
             if (currentNode != Node::UNDEFINED) {
                 if (currentNode == toNode) {
@@ -95,7 +110,7 @@ void Dijkstra::findShortestPath(Graph graph, int fromNode, int toNode) {
                             distance[n] = tmp;
                             previous[n] = currentNode;
 
-                            finalPathGraph.addEdge(currentNode, n);
+
 
 //                            currentNodeList.emplace_back(n);
                         }
@@ -122,27 +137,26 @@ bool Dijkstra::isOpenEmpty() {
 void Dijkstra::traceBackFinalPath(int currentNode) {
     std::cout << "Is tracing back final path" << std::endl;
     totalPathCost = distance[currentNode];
-    while(previous[currentNode] != Node::UNDEFINED) {
+    while(previous[currentNode] != currentNode) {
         finalPath.emplace_back(currentNode);
 //        std::cout << "current: " << currentNodeList << " ";
-        currentNode = previous[currentNode];
+        int prev = previous[currentNode];
+
+        tmp.addEdge(prev, currentNode);
+
+        currentNode = prev;
+
+
     }
     //add the starting node also
     finalPath.emplace_back(currentNode);
 
-    drawFinalPath();
+//    drawFinalPath();
+
+    isFound = true;
 
 //    std::reverse(finalPath.begin(),finalPath.end());
 
-}
-
-
-void Dijkstra::drawFinalPath() {
-    /*tmp = Graph(finalPath.size(), sf::Color::Red);
-    for (int i = 0; i < finalPath.size() - 1; i++) {
-        tmp.addEdge(finalPath[i], finalPath[i - 1]);
-    }*/
-    isFound = true;
 }
 
 
@@ -178,16 +192,18 @@ const std::vector<int> &Dijkstra::getFinalPath() const {
 }
 
 void Dijkstra::draw(sf::RenderTarget &target, sf::RenderStates state) const {
-    std::cout << "drawing djk graph" << std::endl;
+//    std::cout << "drawing djk graph" << std::endl;
 
     finalPathGraph.draw(target, state);
 
-    for (int i = 0; i < currentNodeList.size(); i++) {
-        std::cout << "IS THIS FUCKING CURRENT NODE " << i << "BEING DRAWN?" << std::endl;
-        Node(currentNodeList[i], sf::Color::Red).draw(target, state);
-    }
+    Node(currentNode, sf::Color::Red).draw(target, state);
 
-//    tmp.draw(target, state);
+    /*for (int i = 0; i < currentNodeList.size(); i++) {
+//        std::cout << "IS THIS FUCKING CURRENT NODE " << i << "BEING DRAWN?" << std::endl;
+        Node(currentNodeList[i], sf::Color::Red).draw(target, state);
+    }*/
+
+    tmp.draw(target, state);
 
 }
 

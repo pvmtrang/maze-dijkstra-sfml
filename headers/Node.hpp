@@ -15,9 +15,16 @@ private:
     int xCoord;
     int yCoord;
 
+//    sf::Text text;
+
+//    sf::Font loadFont();
+
+//    sf::Font font;
+
     sf::RectangleShape square;
 
     sf::Color color;
+
 
 public:
     static const int UNDEFINED = -1;    ; //This is just the declaration, the def is in cpp
@@ -29,11 +36,13 @@ public:
 //    const sf::Color COLOR_BORDER {sf::Color::Red};
 
 
-    Node(int data = UNDEFINED, sf::Color color = sf::Color::White);
+    explicit Node(int data = UNDEFINED, sf::Color color = sf::Color::White);
 
 //    Node(Node &other);
 
     int getData();
+
+//    void setText(std::string newText);
 
     void setData(int data);
 
@@ -49,6 +58,7 @@ public:
     sf::RectangleShape getShape();
 
     void draw(sf::RenderTarget& target, sf::RenderStates state = sf::RenderStates::Default) const override;
+
 
 };
 

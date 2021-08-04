@@ -718,6 +718,14 @@ F:/edoc/c--/maze-sfml/src/Dijkstra.hpp
 Graph.hpp
 F:/edoc/c--/maze-sfml/src/Graph.hpp
 
+F:/edoc/c--/maze-sfml/src/Graph.cpp
+iostream
+-
+algorithm
+-
+Graph.hpp
+F:/edoc/c--/maze-sfml/src/Graph.hpp
+
 F:/edoc/c--/maze-sfml/src/Maze.cpp
 cstdlib
 -
@@ -737,8 +745,6 @@ Node.hpp
 F:/edoc/c--/maze-sfml/src/Node.hpp
 Maze.hpp
 F:/edoc/c--/maze-sfml/src/Maze.hpp
-SFML/Graphics.hpp
--
 
 F:/edoc/c--/maze-sfml/src/main.cpp
 iostream

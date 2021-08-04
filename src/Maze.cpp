@@ -9,8 +9,8 @@
 #include "Maze.hpp"
 
 //set value like this only work with 0
-Maze::Maze() : mazeGraph(NUMBER_OF_CELL), weightedGraph(NUMBER_OF_CELL), countVisitPerNode{0} {
-    srand((int) time(0));
+Maze::Maze() : mazeGraph(NUMBER_OF_CELL), weightedGraph(NUMBER_OF_CELL) {
+    srand((int) time(nullptr));
     isDone = false;
 }
 
@@ -35,17 +35,13 @@ void Maze::generateMaze( sf::RenderTarget& target, int fromNode) {
         }
         //Choose a random node in mazeGraph
         Node randomNode = getRandomNode(addedToGraphNode);
-//        countVisitPerNode[randomNode.getData()] += 1;
-        /*if (countVisitPerNode[randomNode.getData()]) {
-
-        }*/
         //Connect to a random neighbor node that is not in mazeGraph
         std::vector<Node> neighbors = getUnvisitedNeighborNode(randomNode);
         Node randomNeighbor = getRandomNode(neighbors);
         //if there's no unvisited neighbor nodes -> skip this one;
         if (randomNeighbor.getData() == Node::UNDEFINED) {
 //            continue;
-//why cant???
+//why cant??? this looks like it would make it faster?
 //            Node otherRandomNode = getRandomNode(addedToGraphNode);
 //            generateMaze(target, otherRandomNode.getData());
         } else {
@@ -61,6 +57,7 @@ void Maze::generateMaze( sf::RenderTarget& target, int fromNode) {
         }
     } else {
         if (!isWeightedGraphGenerated()) {
+
             generateWeightedGraph();
         }
 
@@ -204,6 +201,9 @@ void Maze::generateWeightedGraph() {
             }
         }
     }
+
+    std::cout << "Done generating weighted graph" << std::endl;
+
     isDone = true;
 
 //    weightedGraph.printGraph();

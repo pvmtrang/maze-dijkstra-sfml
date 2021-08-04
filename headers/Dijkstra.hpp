@@ -31,6 +31,8 @@ private:
     std::vector<int> previous;
     std::vector<int> finalPath;
 
+    int currentNode;
+
     bool isOpenEmpty();
 
     bool isFound;
@@ -39,13 +41,12 @@ private:
 
     void traceBackFinalPath(int currentNode);
 
-    void drawFinalPath();
+//    void drawFinalPath();
 
     void draw(sf::RenderTarget& target, sf::RenderStates state = sf::RenderStates::Default) const override;
 
     bool isGraphSet;
 
-    std::vector<int> currentNodeList;
 
 public:
 //    explicit is for prevent constructor from implicit convert param type
@@ -63,7 +64,6 @@ public:
     [[nodiscard]] const std::vector<int> &getFinalPath() const;
 
     void printGraph();
-
 
 };
 
