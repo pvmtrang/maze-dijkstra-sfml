@@ -1,3 +1,0 @@
-F:/edoc/c--/maze-sfml/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-F:/edoc/c--/maze-sfml/cmake-build-debug/CMakeFiles/maze-sfml.dir
-F:/edoc/c--/maze-sfml/cmake-build-debug/CMakeFiles/edit_cache.dir
