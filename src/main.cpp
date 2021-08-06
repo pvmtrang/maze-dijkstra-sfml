@@ -1,12 +1,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include <Graph.hpp>
 #include <Dijkstra.hpp>
-#include "UnionFind.hpp"
 #include "Node.hpp"
 #include "Maze.hpp"
-#include <string.h>
-#include <algorithm>
 
 void takeInput(sf::RenderWindow &window) {
     sf::Event event{};
@@ -28,11 +24,11 @@ void takeInput(sf::RenderWindow &window) {
 }
 
 int main() {
-    static const int SCALED_WIDTH = Maze::WIDTH * Node::SIZE_CELL;
-    static const int SCALED_HEIGHT = Maze::HEIGHT * Node::SIZE_CELL;
+    static const int SCALED_WIDTH = Maze::HORIZONTAL * Node::SIZE_CELL;
+    static const int SCALED_HEIGHT = Maze::VERTICAL * Node::SIZE_CELL;
 
     static const int SPEED_HIGH = 70;
-    static const int SPEED_LOW = 10;
+    static const int SPEED_LOW = 5;
 
     sf::RenderWindow window(sf::VideoMode(SCALED_WIDTH, SCALED_HEIGHT),
                             "Mazzzzzzzze", sf::Style::Default);
@@ -41,8 +37,10 @@ int main() {
     Maze maze;
     Dijkstra djk;
 
+    maze.readMazeFromFile("assets/maze10x10.txt");
+
         while (window.isOpen()) {
-        maze.generateMaze(window);
+//        maze.generateMaze(window);
 
         maze.draw(window);
 

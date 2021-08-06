@@ -43,26 +43,27 @@ void Graph::clearGraph() {
  * Add to the second because its easier than add to last
  * if anything related to neighbor list traversal, change here to insert last
  */
-void Graph::addEdge(int node1, int node2) {
-    if (node1 >= getNumberOfNode() || node2 >= getNumberOfNode()) {
-        std::cerr << "idiot add nodes that doesnt exist. Try something smaller than the capacity." << std::endl;
+void Graph::addEdge(Node node1, Node node2) {
+    int data1 = node1.getData();
+    int data2 = node2.getData();
+    if (data1 >= getNumberOfNode() || data2 >= getNumberOfNode()) {
+        std::cout << "idiot add nodes that doesnt exist. Try something smaller than the capacity." << std::endl;
         return;
-    } else if (node1 == node2) {
-        std::cerr << "node1 and node2 are both equal to: " << node1 << std::endl;
+    } else if (data1 == data2) {
+        std::cout << "node1 and node2 are both equal to: " << data1 << std::endl;
         return;
     } else {
-        Node newNode1(node1);
-        Node newNode2(node2);
-        if (std::count(graph[node1].begin(), graph[node1].end(), newNode2)) {
-            std::cerr << "Node " << node1 << " is already connected to node " << node2 << std::endl;
-        }
-        else if (std::count(graph[node2].begin(), graph[node2].end(), newNode1)) {
-            std::cerr << "Node " << node2 << " is already connected to node " << node1 << std::endl;
+
+        if (std::count(graph[data1].begin(), graph[data1].end(), node2)) {
+            std::cout << "Node " << data1 << " is already connected to node " << data2 << std::endl;
+        } // du sao cung ko vao else if
+        else if (std::count(graph[data2].begin(), graph[data2].end(), node1)) {
+            std::cout << "Node " << data2 << " is already connected to node " << data1 << std::endl;
         } else {
-            graph[node1].emplace_after(graph[node1].begin(), newNode2);
-            graph[node2].emplace_after(graph[node2].begin(), newNode1);
-            std::cout << "is connecting node " << node1 << " and node " << node2 << std::endl;
-            addToColoredEdge(newNode1, newNode2);
+            graph[data1].emplace_after(graph[data1].begin(), node2);
+            graph[data2].emplace_after(graph[data2].begin(), node1);
+            std::cout << "is connecting node " << data1 << " and node " << data2 << std::endl;
+            addToColoredEdge(node1, node2);
         }
     }
 }
@@ -97,17 +98,18 @@ void Graph::addToColoredEdge(Node node1, Node node2) {
  * @param node2
  * @return 1 or distance or another value implying they are not on the same col or row
  */
-int Graph::getDistance(int node1, int node2) {
-    Node n1 = graph[node1].front();
-    Node n2 = graph[node2].front();
+int Graph::getDistance(Node node1, Node node2) {
+//    Node n1 = graph[node1].front();
+//    Node n2 = graph[node2].front();
 
 //    hope that x undefined -> y undefined
-    if (n1.getXCoord() == Node::UNDEFINED || n2.getXCoord() == Node::UNDEFINED) {
+//wtf is this nhi??
+    if (node1.getXCoord() == Node::UNDEFINED || node2.getXCoord() == Node::UNDEFINED) {
         return 1;
     }
     //if on the same row or column
-    if (n1.getXCoord() == n2.getXCoord() || n1.getYCoord() == n2.getYCoord()) {
-        return abs(n1.getXCoord() - n2.getXCoord()) + abs(n1.getYCoord() - n2.getYCoord());
+    if (node1.getXCoord() == node2.getXCoord() || node1.getYCoord() == node2.getYCoord()) {
+        return abs(node1.getXCoord() - node2.getXCoord()) + abs(node1.getYCoord() - node2.getYCoord());
     }
     //a temporary value because couldn't think of anything better
     return Node::UNDEFINED;
@@ -119,14 +121,14 @@ int Graph::getDistance(int node1, int node2) {
  * @param node
  * @return
  */
-std::vector<int> Graph::getNeighborNodes(int node) {
-    std::vector<int>output;
-    for (Node &n : graph[node]) {
+std::vector<Node> Graph::getNeighborNodes(Node node) {
+    std::vector<Node>output;
+    for (Node &n : graph[node.getData()]) {
         // :)
-        if (n.getData() == node) {
+        if (n == node) {
             continue;
         }
-        output.emplace_back(n.getData());
+        output.emplace_back(n);
     }
 
     return output;

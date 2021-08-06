@@ -11,7 +11,7 @@
 #include "Node.hpp"
 
 /**
- ** Maintaining mazeGraph by a adjacency list.
+ ** Maintaining by a adjacency list.
  * implemented by a vector of linked list
  * Adjacency list:
  * [0]: Node(0) -> neighbor -> nodes -> in -> reverse -> inserted -> order
@@ -25,7 +25,7 @@ private:
     
     int numberOfNode;
 
-    sf::Color color{};
+    sf::Color color;
 
     std::vector<sf::RectangleShape> coloredEdge;
 
@@ -41,13 +41,19 @@ public:
 
     void clearGraph();
 
-    void addEdge(int node1, int node2);
+//    void addEdge(int node1, int node2);
 
-    int getDistance(int node1, int node2);
+    void addEdge(Node node1, Node node2);
+
+//    int getDistance(int node1, int node2);
+
+    int getDistance(Node node1, Node node2);
 
     int getNumberOfNode() const;
 
-    std::vector<int> getNeighborNodes(int node);
+//    std::vector<int> getNeighborNodes(int node);
+
+    std::vector<Node> getNeighborNodes(Node node);
 
     void draw(sf::RenderTarget& target, sf::RenderStates state = sf::RenderStates::Default) const override;
 

@@ -15,12 +15,6 @@ private:
     int xCoord;
     int yCoord;
 
-//    sf::Text text;
-
-//    sf::Font loadFont();
-
-//    sf::Font font;
-
     sf::RectangleShape square;
 
     sf::Color color;
@@ -32,11 +26,7 @@ public:
     static const int SIZE_BORDER = 10;
     static const int SIZE_NODE = SIZE_CELL - 2 * SIZE_BORDER;
 
-    sf::Color COLOR_NODE {sf::Color::White};
-//    const sf::Color COLOR_BORDER {sf::Color::Red};
-
-
-    explicit Node(int data = UNDEFINED, sf::Color color = sf::Color::White);
+    explicit Node(int data = UNDEFINED, sf::Color color1 = sf::Color::Cyan);
 
 
     int getData();
@@ -46,6 +36,8 @@ public:
     int getXCoord() const;
 
     int getYCoord() const;
+
+    void setColor(const sf::Color &color);
 
 //    is this equivalent to equals in java ?? :D wtf
     bool operator==(const Node &rhs) const;

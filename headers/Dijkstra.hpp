@@ -25,7 +25,11 @@ private:
 
     int totalPathCost;
 
-    int currentNode;
+    int currentNodeData;
+
+    int fromNode = 0;
+
+    int goalNode = Maze::NUMBER_OF_CELL - 1;
 
 //    use vector because array size must be given in declaration
     std::vector<bool> open;
@@ -38,7 +42,7 @@ private:
     std::vector<sf::Text> distanceText;
 
 
-    void updateDistanceText(int node, std::string newString);
+    void updateDistanceText(Node node, std::string newString);
 
 
     bool isOpenEmpty();
@@ -62,7 +66,7 @@ public:
 
     void setGraph(const Graph &graph);
 
-    void findShortestPath(Graph graph, int fromNode = 0, int ToNode = Maze::NUMBER_OF_CELL - 1);
+    void findShortestPath(Graph graph);
 
 //    [nodiscard] raises warning if the return value of the function is ignored
     [[nodiscard]] int getTotalPathCost() const;

@@ -12,11 +12,14 @@
 
 class Maze : public sf::Drawable {
 public:
-    static const int WIDTH = 12;
-    static const int HEIGHT = 8;
-    static const int NUMBER_OF_CELL = WIDTH * HEIGHT;
+    //manually update this whenever read maze from file
+    static const int HORIZONTAL = 10;
+    static const int VERTICAL = 10;
+    static const int NUMBER_OF_CELL = HORIZONTAL * VERTICAL;
 
     Maze();
+
+    void readMazeFromFile(std::string filePath);
 
     void generateMaze( sf::RenderTarget& target, int fromNode = 0);
 
@@ -30,10 +33,8 @@ public:
 
     bool isDone;
 
-private:
-//    const sf::Color COLOR_MAZE_GRAPH{ sf::Color::Cyan};
-//    const sf::Color COLOR_WEIGHTED_GRAPH{sf::Color::Green};
 
+private:
     Graph mazeGraph;
 
     Graph weightedGraph;
@@ -48,16 +49,18 @@ private:
 
     std::vector<Node> getUnvisitedNeighborNode(Node n);
 
-    bool isQualifiedForWeightedGraph(int node);
+    bool isQualifiedForWeightedGraph(Node node);
 
-    int findNextQualifiedNode(int node);
+    Node findNextQualifiedNode(Node node);
 
     //cant think of a better name =_=
-    std::vector<int> qualifiedNode;
+    std::vector<Node> qualifiedNode;
 
     void findAllQualifiedNode();
 
     bool isWeightedGraphGenerated();
+
+//    void createMultiplePath();
 
 
 

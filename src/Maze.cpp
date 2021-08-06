@@ -6,9 +6,9 @@
 #include <ctime>
 #include <iostream>
 #include <algorithm>
+#include <fstream>
 #include "Maze.hpp"
 
-//set value like this only work with 0
 Maze::Maze() : mazeGraph(NUMBER_OF_CELL), weightedGraph(NUMBER_OF_CELL) {
     srand((int) time(nullptr));
     isDone = false;
@@ -26,10 +26,6 @@ void Maze::generateMaze( sf::RenderTarget& target, int fromNode) {
     if (addedToGraphNode.size() < NUMBER_OF_CELL) {
         std::cout << "is drawing maze from node " << fromNode << std::endl;
 
-        //Because of recursion, there might be a (lot of) chance
-        //that fromNode is already added in the vector
-        //because fromNode is randomly choose from the neighbor set
-        //i feel like my above explanation is wrong somewhere but i'm in a hurry so whatever
         if (!isInGraph(Node(fromNode))) {
             addedToGraphNode.emplace_back(Node(fromNode));
         }
@@ -39,58 +35,20 @@ void Maze::generateMaze( sf::RenderTarget& target, int fromNode) {
         std::vector<Node> neighbors = getUnvisitedNeighborNode(randomNode);
         Node randomNeighbor = getRandomNode(neighbors);
         //if there's no unvisited neighbor nodes -> skip this one;
-        if (randomNeighbor.getData() == Node::UNDEFINED) {
-//            continue;
-//why cant??? this looks like it would make it faster?
-//            Node otherRandomNode = getRandomNode(addedToGraphNode);
-//            generateMaze(target, otherRandomNode.getData());
-        } else {
-//this shit is so suspicious
-            mazeGraph.addEdge(randomNode.getData(), randomNeighbor.getData());
+        if (randomNeighbor.getData() != Node::UNDEFINED) {
+            mazeGraph.addEdge(randomNode, randomNeighbor);
 
             draw(target);
 
-            //Add that neighbor to mazeGraph
-//            addedToGraphNode.emplace_back(randomNeighbor);
             generateMaze(target, randomNeighbor.getData());
-
         }
     } else {
         if (!isWeightedGraphGenerated()) {
-
             generateWeightedGraph();
         }
 
     }
 }
-
-/*void Maze::generateMaze( sf::RenderTarget& target, int fromNode) {
-    if (countMazeGenerated <= 1) {
-        std::cout << "is drawing maze" << std::endl;
-        addedToGraphNode.emplace_back(Node(fromNode));
-
-        //while not all nodes are in mazeGraph
-        while(addedToGraphNode.size() != NUMBER_OF_CELL) {
-            //Choose a random node in mazeGraph
-            Node randomNode = getRandomNode(addedToGraphNode);
-            //Connect to a random neighbor node that is not in mazeGraph
-            std::vector<Node> neighbors = getUnvisitedNeighborNode(randomNode);
-            Node randomNeighbor = getRandomNode(neighbors);
-            //if there's no unvisited neighbor nodes -> skip this one;
-            if (randomNeighbor.getData() == Node::UNDEFINED) {
-                continue;
-            } else {
-//this shit is so suspicious
-                mazeGraph.addEdge(randomNode.getData(), randomNeighbor.getData());
-                //Add that neighbor to mazeGraph
-                addedToGraphNode.emplace_back(randomNeighbor);
-            }
-
-            draw(target);
-        }
-        mazeGraph.printGraph();
-    }
-}*/
 
 /**
  * To choose a random node from a set.
@@ -129,25 +87,25 @@ std::vector<Node> Maze::getUnvisitedNeighborNode(Node n) {
     int rightY = n.getYCoord();
 
     if (upY >= 0) {
-        Node up(upY * WIDTH + upX);
+        Node up(upY * HORIZONTAL + upX);
         if (!isInGraph(up)) {
             output.emplace_back(up);
         }
     }
-    if (downY < HEIGHT) {
-        Node down(downY * WIDTH + downX);
+    if (downY < VERTICAL) {
+        Node down(downY * HORIZONTAL + downX);
         if (!isInGraph(down)) {
             output.emplace_back(down);
         }
     }
     if (leftX >= 0) {
-        Node left(leftY * WIDTH + leftX);
+        Node left(leftY * HORIZONTAL + leftX);
         if (!isInGraph(left)) {
             output.emplace_back(left);
         }
     }
     if (rightX >= 0) {
-        Node right(rightY * WIDTH + rightX);
+        Node right(rightY * HORIZONTAL + rightX);
         if (!isInGraph(right)) {
             output.emplace_back(right);
         }
@@ -171,11 +129,16 @@ Graph Maze::getMazeGraph() {
 }
 
 void Maze::findAllQualifiedNode() {
-    for (int i = 0; i < mazeGraph.getNumberOfNode(); i++) {
+    for (Node n : addedToGraphNode) {
+        if (isQualifiedForWeightedGraph(n)) {
+            qualifiedNode.emplace_back(n);
+        }
+    }
+    /*for (int i = 0; i < mazeGraph.getNumberOfNode(); i++) {
         if (isQualifiedForWeightedGraph(i)) {
             qualifiedNode.emplace_back(i);
         }
-    }
+    }*/
 }
 
 
@@ -187,15 +150,15 @@ void Maze::generateWeightedGraph() {
 //    std::vector<int> qualifiedNode;
     findAllQualifiedNode();
 //2. generate the weighted graph
-    for (int iQualifiedNode : qualifiedNode) {
+    for (Node iQualifiedNode : qualifiedNode) {
         //loop through it's neighbor
-        for (int iNeighbor : mazeGraph.getNeighborNodes(iQualifiedNode)) {
+        for (Node iNeighbor : mazeGraph.getNeighborNodes(iQualifiedNode)) {
             //if that neighbor is qualified -> create an edge for weighted graph
             if (isQualifiedForWeightedGraph(iNeighbor)) {
                 weightedGraph.addEdge(iQualifiedNode, iNeighbor);
             } else {
             // dig depth into neighbor's neighbor until reach the first qualified node
-                int nextQualified = findNextQualifiedNode(iNeighbor);
+                Node nextQualified = findNextQualifiedNode(iNeighbor);
                 weightedGraph.addEdge(iQualifiedNode, nextQualified);
 
             }
@@ -203,6 +166,8 @@ void Maze::generateWeightedGraph() {
     }
 
     std::cout << "Done generating weighted graph" << std::endl;
+
+
 
     isDone = true;
 
@@ -212,8 +177,9 @@ void Maze::generateWeightedGraph() {
 //this is like depth first search without backtracking
 //take the first neighbor in the neighbor set
 //and keep digging into that first neighbor's first neighbor
-int Maze::findNextQualifiedNode(int node) {
-    int firstNeighbor = mazeGraph.getNeighborNodes(node)[0];
+//get neighbor node only return it's neighbor node, not include the node itself
+Node Maze::findNextQualifiedNode(Node node) {
+    Node firstNeighbor = mazeGraph.getNeighborNodes(node)[0];
     if (isQualifiedForWeightedGraph(firstNeighbor)) {
         return firstNeighbor;
     }
@@ -228,8 +194,9 @@ int Maze::findNextQualifiedNode(int node) {
  *  2 neighbors: if in different col and row -> turn
  *  >2 neighbors: junction
  */
-bool Maze::isQualifiedForWeightedGraph(int node) {
-    std::vector<int> neighbor = mazeGraph.getNeighborNodes(node);
+bool Maze::isQualifiedForWeightedGraph(Node node) {
+//    std::vector<int> neighbor = mazeGraph.getNeighborNodes(node);
+    std::vector<Node> neighbor = mazeGraph.getNeighborNodes(node);
     switch (neighbor.size()) {
         case 0: {//might not happen. Forse
             return false;
@@ -238,8 +205,8 @@ bool Maze::isQualifiedForWeightedGraph(int node) {
             return true;
         }
         case 2: {
-            Node n1(neighbor[0]);
-            Node n2(neighbor[1]);
+            Node n1 = neighbor[0];
+            Node n2 = neighbor[1];
             // 2 neighbor not on the same col or row aka a turn
             if (n1.getXCoord() == n2.getXCoord() || n1.getYCoord() == n2.getYCoord()) {
                 return false;
@@ -263,24 +230,62 @@ void Maze::draw(sf::RenderTarget &target, sf::RenderStates state) const {
     mazeGraph.draw(target);
 
     for (int i = 0; i < qualifiedNode.size(); i++) {
-        target.draw(Node(qualifiedNode[i], sf::Color::Cyan));
+        target.draw(qualifiedNode[i]);
     }
 
 }
 
 bool Maze::isWeightedGraphGenerated() {
+//    std::cout << "Check if weihted graph is generated" << std::endl;
     for (int i = 0; i < weightedGraph.getNumberOfNode(); i++) {
 //        std::vector<int> neighbor = weightedGraph.getNeighborNodes(i);
 //because every list has a default element which is itself
-        if (weightedGraph.getNeighborNodes(i).size() > 1) {
+        if (weightedGraph.getNeighborNodes(Node(i)).size() > 1) {
             return true;
         }
     }
     return false;
 }
 
+void Maze::readMazeFromFile(std::string filePath) {
+    std::ifstream file(filePath);
+    std::vector<std::string> map;
+    std::string line;
 
+    while (std::getline(file, line)) {
+        std::cout << line << std::endl;
+        map.emplace_back(line);
+    }
 
+    int height = map.size();
+    int length = map[0].size();
 
+    int vertical = (height + 1) / 2;
+    int horizontal = (length + 1) / 2;
 
-
+    for (int i = 0; i < height; i += 2) {
+        for (int j = 0; j < length; j += 2) {
+            switch (map[i][j]) {
+                case '*': {
+                    int nodeData = (i / 2) * horizontal + (j / 2);
+                    Node thisNode(nodeData);
+                    addedToGraphNode.emplace_back(thisNode);
+                    //check right
+                    if (j + 1 < length && map[i][j + 1] == '+') {
+                        Node rightNode(nodeData + 1);
+                        mazeGraph.addEdge(thisNode, rightNode);
+                    }
+                    //check down
+                    if (i + 1 < height && map[i + 1][j] == '+') {
+                        Node downNode(nodeData + horizontal);
+                        mazeGraph.addEdge(thisNode, downNode);
+                    }
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    }
+    generateWeightedGraph();
+}
