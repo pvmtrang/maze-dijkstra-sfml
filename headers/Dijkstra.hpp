@@ -31,10 +31,9 @@ private:
 
     int goalNode = Maze::NUMBER_OF_CELL - 1;
 
-//    use vector because array size must be given in declaration
     std::vector<bool> open;
-    std::vector<int> distance;
     std::vector<bool> closed;
+    std::vector<int> distance;
     std::vector<int> previous;
     std::vector<int> finalPath;
 
@@ -52,8 +51,6 @@ private:
     int findMinDistanceNode();
 
     void traceBackFinalPath(int currentNode);
-
-//    void drawFinalPath();
 
     bool isGraphSet;
 

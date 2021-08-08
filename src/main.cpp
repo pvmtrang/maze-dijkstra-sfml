@@ -28,7 +28,7 @@ int main() {
     static const int SCALED_HEIGHT = Maze::VERTICAL * Node::SIZE_CELL;
 
     static const int SPEED_HIGH = 70;
-    static const int SPEED_LOW = 5;
+    static const int SPEED_LOW = 6;
 
     sf::RenderWindow window(sf::VideoMode(SCALED_WIDTH, SCALED_HEIGHT),
                             "Mazzzzzzzze", sf::Style::Default);
@@ -39,7 +39,7 @@ int main() {
 
     maze.readMazeFromFile("assets/maze10x10.txt");
 
-        while (window.isOpen()) {
+    while (window.isOpen()) {
 //        maze.generateMaze(window);
 
         maze.draw(window);
