@@ -1,9 +1,9 @@
 # maze-sfml
-___
+
 A simple visualization of Dijkstra finding the shortest path in maze with the help of C++ and SFML.
 
 ## How it works:
-___
+
 First, generated a **maze**. There are two ways:
 1. Read given maze from file .txt in assets/mazeMap. 
    ' * '  is the node and ' + ' is the path in maze. 
