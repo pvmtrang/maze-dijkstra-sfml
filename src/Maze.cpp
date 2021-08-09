@@ -224,9 +224,10 @@ Graph Maze::getWeightedGraph() {
 }
 
 void Maze::draw(sf::RenderTarget &target, sf::RenderStates state) const {
-    for (int i = 0; i < addedToGraphNode.size(); i++) {
+    /*for (int i = 0; i < addedToGraphNode.size(); i++) {
         target.draw(addedToGraphNode[i]);
     }
+    */
     mazeGraph.draw(target);
 
     for (int i = 0; i < qualifiedNode.size(); i++) {

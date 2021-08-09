@@ -37,10 +37,10 @@ int main() {
     Maze maze;
     Dijkstra djk;
 
-    maze.readMazeFromFile("assets/maze10x10.txt");
+//    maze.readMazeFromFile("assets/maze10x10.txt");
 
     while (window.isOpen()) {
-//        maze.generateMaze(window);
+        maze.generateMaze(window);
 
         maze.draw(window);
 
