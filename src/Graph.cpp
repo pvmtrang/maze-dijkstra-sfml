@@ -53,7 +53,6 @@ void Graph::addEdge(Node node1, Node node2) {
         std::cout << "node1 and node2 are both equal to: " << data1 << std::endl;
         return;
     } else {
-
         if (std::count(graph[data1].begin(), graph[data1].end(), node2)) {
             std::cout << "Node " << data1 << " is already connected to node " << data2 << std::endl;
         } // du sao cung ko vao else if

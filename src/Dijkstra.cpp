@@ -65,41 +65,39 @@ void Dijkstra::findShortestPath(Graph graph) {
         previous[fromNode] = fromNode;
         updateDistanceText(Node(fromNode), std::to_string(0));
     }
-    if (!isFound) {
-        //if - while
-        if(isOpenEmpty()) {
-            currentNodeData = findMinDistanceNode();
-            Node currentNode(currentNodeData);
+    //if - while
+    if (!isFound || isOpenEmpty()) {
+        currentNodeData = findMinDistanceNode();
+        Node currentNode(currentNodeData);
 
-            std::cout << "NODE " << currentNodeData << " DISTANCE TO 0: " << distance[currentNodeData] << std::endl;
+        std::cout << "NODE " << currentNodeData << " DISTANCE TO 0: " << distance[currentNodeData] << std::endl;
 
-            //for rendering
-            visitedPathGraph.addEdge(currentNode, Node(previous[currentNodeData]));
+        //for rendering
+        visitedPathGraph.addEdge(currentNode, Node(previous[currentNodeData]));
 
-            if (currentNodeData == goalNode) {
-                traceBackFinalPath(currentNodeData);
-                std::cout << std::endl << "final shortest path is: ";
-                for (int i : finalPath) {
-                    std::cout << i << " ";
-                }
-                return;
+        if (currentNodeData == goalNode) {
+            traceBackFinalPath(currentNodeData);
+            std::cout << std::endl << "final shortest path is: ";
+            for (int i : finalPath) {
+                std::cout << i << " ";
             }
+            return;
+        }
 
-            //move node from open to closed
-            open[currentNodeData] = false;
-            closed[currentNodeData] = true;
+        //move node from open to closed
+        open[currentNodeData] = false;
+        closed[currentNodeData] = true;
 
-            std::vector<Node> neighbor = graph.getNeighborNodes(currentNode);
+        std::vector<Node> neighbor = graph.getNeighborNodes(currentNode);
 
-            for(Node n : neighbor) {
-                if (!closed[n.getData()]) {
-                    int tmp = distance[currentNodeData] + graph.getDistance(currentNode, n);
-                    if(tmp < distance[n.getData()]) {
-                        distance[n.getData()] = tmp;
-                        previous[n.getData()] = currentNodeData;
+        for(Node n : neighbor) {
+            if (!closed[n.getData()]) {
+                int tmp = distance[currentNodeData] + graph.getDistance(currentNode, n);
+                if(tmp < distance[n.getData()]) {
+                    distance[n.getData()] = tmp;
+                    previous[n.getData()] = currentNodeData;
 
-                        updateDistanceText(n, std::to_string(tmp));
-                    }
+                    updateDistanceText(n, std::to_string(tmp));
                 }
             }
         }
